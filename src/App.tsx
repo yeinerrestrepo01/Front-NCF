@@ -5,12 +5,12 @@ import './App.scss';
 
 const App: React.FC = () => {
   return (
-   <main>
-    <ResolveProvider>
-     <AppRoute/>
-     </ResolveProvider>
-   </main>
+    <main>
+      <ResolveProvider>
+        <AppRoute />
+      </ResolveProvider>
+    </main>
   );
-}
+};
 
 export default App;

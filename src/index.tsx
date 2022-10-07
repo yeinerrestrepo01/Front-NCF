@@ -5,9 +5,8 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -28,4 +27,3 @@ root.render(
     </BrowserRouter>
   </>
 );
-

@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const InvoiceSetting: React.FC = () => {
-    return (
-        <div>InvoiceSetting</div>
-    )
-}
+  return (
+    <div>
+      <span>useInvoiceSetting</span>
+    </div>
+  );
+};
 
-export default InvoiceSetting
+export default InvoiceSetting;
