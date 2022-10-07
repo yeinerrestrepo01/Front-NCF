@@ -1,0 +1,1 @@
+export { ResolveProvider } from './withResolve';
