@@ -1,0 +1,25 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    // .label {
+    //     padding-left: 5px;
+    //     color: #8395a7;
+    //     font-size: 13px;
+    //     font-family: "Poppins Light";
+    // }
+
+    span {
+        color: var(--error);
+        font-size: 12px;
+    }
+
+    .hasError {
+        border: 1px solid var(--error);
+    }
+
+    .error {
+        color: var(--error);
+    }
+}

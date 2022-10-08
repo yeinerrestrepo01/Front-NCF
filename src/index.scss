@@ -1,20 +1,25 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont,'Montserrat', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.thead-dark{
+.thead-dark {
   background: #212529;
   color: white;
 }
-.iconos-check{
+.iconos-check {
   width: 20px;
   height: 20px;
+}
+
+$error: #ff0000bb;
+
+:root {
+  --error: #{$error};
 }

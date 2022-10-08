@@ -5,13 +5,25 @@ import { TableBody, TableHeader } from 'components/Table/elements';
 import styles from './Table.module.scss';
 
 interface TableProps {
+  /**
+   * Components properties Table
+   */
   children?:
     | React.FC<ColumnsProps>
     | React.FC<ColumnsProps>[]
     | React.ReactElement<ColumnsProps>
     | React.ReactElement<ColumnsProps>[];
+  /**
+   * Sets a class of the Table DOM element.
+   */
   className?: string;
+  /**
+   * Sets the data of the Table ([see example]({% slug paging_Table %})). If you use paging, the `data` option has to contain only the items for the current page.
+   */
   data?: unknown[] | DataResult | null;
+  /**
+   * Fires when the user clicks a row.
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onRowClick?: (i: any) => void;
 }
