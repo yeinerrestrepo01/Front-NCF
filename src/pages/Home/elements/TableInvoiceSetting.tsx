@@ -1,3 +1,6 @@
+import { Table } from 'components';
+import { GridCellProps } from 'components/Table/constants/Table.interface';
+import { TableColumn } from 'components/Table/elements';
 import { Checksolid, NoChecksolid } from 'global/icons/inex';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import React from 'react';
@@ -11,67 +14,43 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
   data,
   HandleInfoCorrection,
 }) => {
+  const getCellFreeGoods = ({ dataItem, field }: GridCellProps) => {
+    if (field === 'freeGoods') {
+      const resp =
+        dataItem.freeGoods === 0 ? (
+          <NoChecksolid className="iconos-check" />
+        ) : (
+          <Checksolid className="iconos-check" />
+        );
+      return resp;
+    }
+    return null;
+  };
+
   return (
     <div>
       {data?.length > 0 ? (
-        <table className="table table-bordered">
-          <thead className="thead-dark">
-            <tr>
-              <th align="center">Codigo Producto</th>
-              <th align="center">QTY</th>
-              <th align="center">Precio Bruto</th>
-              <th align="center">Descuento</th>
-              <th align="center">ITBIS</th>
-              <th align="center">ISC</th>
-              <th align="center">ISCE</th>
-              <th align="center">Neto</th>
-              <th align="center">Interes Financiamiento</th>
-              <th align="center">Free Goods</th>
-              <th align="center">Seleccionado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((info) => (
-              <tr
-                key={info.idProduct}
-                className={`${info.freeGoods === 0 ? 'item-select' : ''}`}
-                onClick={() => info.freeGoods === 0 && HandleInfoCorrection(info)}
-              >
-                <th scope="row">{info.idProduct}</th>
-                <td align="center">{info.amount}</td>
-                <td align="right" width={'130px'}>
-                  {info.brutoTotal}
-                </td>
-                <td align="right" width={'130px'}>
-                  {info.descuentoAmount}
-                </td>
-                <td align="right" width={'110px'}>
-                  {info.taxAmount}
-                </td>
-                <td align="right" width={'120px'}>
-                  {info.isc}
-                </td>
-                <td align="right" width={'120px'}>
-                  {info.isce}
-                </td>
-                <td align="right" width={'120px'}>
-                  {info.netAmount}
-                </td>
-                <td align="right" width={'130px'}>
-                  {info.interestValue}
-                </td>
-                <td align="center">
-                  {info.freeGoods === 0 ? (
-                    <NoChecksolid className="iconos-check" />
-                  ) : (
-                    <Checksolid className="iconos-check" />
-                  )}
-                </td>
-                <td></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table className="table" data={data} onRowClick={HandleInfoCorrection}>
+          <TableColumn field="idProduct" title="Codigo Producto" />
+          <TableColumn className="items-center" field="amount" title="amount" />
+          <TableColumn className="items-center" field="brutoTotal" title="Precio Bruto" />
+          <TableColumn className="items-center" field="descuentoAmount" title="Descuento" />
+          <TableColumn className="items-center" field="taxAmount" title="Itbis" />
+          <TableColumn className="items-center" field="isc" title="ISC" />
+          <TableColumn className="items-center" field="isce" title="ISCE" />
+          <TableColumn className="items-center" field="netAmount" title="Neto" />
+          <TableColumn
+            className="items-center"
+            field="interestValue"
+            title="Interes Financiamiento"
+          />
+          <TableColumn
+            cell={getCellFreeGoods}
+            className="items-center"
+            field="freeGoods"
+            title="Seleccionado"
+          />
+        </Table>
       ) : (
         <div></div>
       )}

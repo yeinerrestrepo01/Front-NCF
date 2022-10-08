@@ -1,13 +1,12 @@
+import { Table } from 'components';
+import TableColumn from 'components/Table/elements/TableColumn/TableColumn';
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import React from 'react';
 
 interface TableInvoiceSCorrectionProps {
-  data: IinvoiceSetting;
-  HandlenSendCorrection: (
-    documentoOriginal: IInvoiceDocument,
-    documectCorrection: IInvoiceDocument
-  ) => void;
+  data: IinvoiceSetting[];
+  HandlenSendCorrection: (o: IInvoiceDocument[], c: IInvoiceDocument[]) => void;
 }
 
 const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
@@ -16,57 +15,36 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
 }) => {
   return (
     <div className="mt-3">
-      <table className="table">
-        <thead className="thead-dark">
-          <tr>
-            <th scope="col">Codigo Producto</th>
-            <th scope="col">QTY</th>
-            <th scope="col">Precio Bruto</th>
-            <th scope="col">Descuento</th>
-            <th scope="col">Itbis</th>
-            <th scope="col">ISC</th>
-            <th scope="col">ISCE</th>
-            <th scope="col">Neto</th>
-            <th scope="col">Interes Financiamiento</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">{data.idProduct}</th>
-            <td align="center">{data.amount}</td>
-            <td align="right" width={'130px'}>
-              {data.brutoTotal}
-            </td>
-            <td align="right" width={'130px'}>
-              {data.descuentoAmount}
-            </td>
-            <td align="right" width={'130px'}>
-              {data.taxAmount}
-            </td>
-            <td align="right" width={'130px'}>
-              {data.isc}
-            </td>
-            <td align="right" width={'130px'}>
-              {data.isce}
-            </td>
-            <td align="right" width={'130px'}>
-              {data.netAmount}
-            </td>
-            <td align="right" width={'130px'}>
-              {data.interestValue}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="mt-3">
-        <button
-          type="button"
-          className="btn btn-warning"
-          onClick={() => HandlenSendCorrection(data, data)}
-        >
-          Enviar Correcion Documento
-        </button>
-      </div>
+      {data.length > 0 ? (
+        <>
+          <Table className="table" data={data}>
+            <TableColumn field="idProduct" title="Codigo Producto" />
+            <TableColumn className="items-center" field="amount" title="QTY" />
+            <TableColumn className="items-center" field="brutoTotal" title="Precio Bruto" />
+            <TableColumn className="items-center" field="descuentoAmount" title="Descuento" />
+            <TableColumn className="items-center" field="taxAmount" title="Itbis" />
+            <TableColumn className="items-center" field="isc" title="ISC" />
+            <TableColumn className="items-center" field="isce" title="ISCE" />
+            <TableColumn className="items-center" field="netAmount" title="Neto" />
+            <TableColumn
+              className="items-center"
+              field="interestValue"
+              title="Interes Financiamiento"
+            />
+          </Table>
+          <div className="mt-3">
+            <button
+              type="button"
+              className="btn btn-warning"
+              onClick={() => HandlenSendCorrection(data, data)}
+            >
+              Enviar Correcion Documento
+            </button>
+          </div>
+        </>
+      ) : (
+        <div />
+      )}
     </div>
   );
 };
