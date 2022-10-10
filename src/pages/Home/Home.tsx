@@ -69,7 +69,11 @@ const Home: React.FC = () => {
       <DocumentCorrection handleSearchInvoice={handleSearchInvoice} />
       <div className="col-12 mt-3">
         <h2>Documento Original</h2>
-        <TableInvoiceSetting data={data} HandleInfoCorrection={HandleInfoCorrection} />
+        <TableInvoiceSetting
+          data={data}
+          HandleInfoCorrection={HandleInfoCorrection}
+          loading={isLoading}
+        />
       </div>
 
       {correctionInfo.length > 0 ? (
@@ -84,7 +88,7 @@ const Home: React.FC = () => {
       ) : (
         <div></div>
       )}
-      {(isLoading || loadingCorrection) && <BackDrop show />}
+      {loadingCorrection && <BackDrop show />}
     </div>
   );
 };
