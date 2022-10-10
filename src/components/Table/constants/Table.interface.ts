@@ -1,7 +1,13 @@
 import { ComponentType } from 'react';
 
 export type DataResult = {
+  /**
+   * The data that will be rendered by the Grid as an array.
+   */
   data: unknown[];
+  /**
+   * The total number of records that are available.
+   */
   total: number;
 };
 
