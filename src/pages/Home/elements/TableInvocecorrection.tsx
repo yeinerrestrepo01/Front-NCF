@@ -19,7 +19,7 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
         <>
           <Table className="table table-bordered" data={data}>
             <TableColumn field="idProduct" title="Codigo Producto" />
-            <TableColumn className="itd-number" field="amount" title="QTY" />
+            <TableColumn className="text-center" field="amount" title="QTY" />
             <TableColumn className="td-number" field="brutoTotal" title="Precio Bruto" />
             <TableColumn className="td-number" field="descuentoAmount" title="Descuento" />
             <TableColumn className="td-number" field="taxAmount" title="Itbis" />

@@ -134,7 +134,7 @@ Table.defaultProps = {
   children: null,
   className: null,
   data: null,
-  loadingData: true,
+  loadingData: false,
   onRowClick: null,
 };
 
