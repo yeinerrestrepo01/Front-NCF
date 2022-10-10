@@ -32,25 +32,26 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
 
   return (
     <div>
-      <Table className="table" data={data} loadingData={loading} onRowClick={HandleInfoCorrection}>
+      <Table
+        className="table table-bordered"
+        data={data}
+        loadingData={loading}
+        onRowClick={HandleInfoCorrection}
+      >
         <TableColumn field="idProduct" title="Codigo Producto" />
-        <TableColumn className="items-center" field="amount" title="amount" />
-        <TableColumn className="items-center" field="brutoTotal" title="Precio Bruto" />
-        <TableColumn className="items-center" field="descuentoAmount" title="Descuento" />
-        <TableColumn className="items-center" field="taxAmount" title="Itbis" />
-        <TableColumn className="items-center" field="isc" title="ISC" />
-        <TableColumn className="items-center" field="isce" title="ISCE" />
-        <TableColumn className="items-center" field="netAmount" title="Neto" />
-        <TableColumn
-          className="items-center"
-          field="interestValue"
-          title="Interes Financiamiento"
-        />
+        <TableColumn className="text-center" field="amount" title="QTY" />
+        <TableColumn className="td-number" field="brutoTotal" title="Precio Bruto" />
+        <TableColumn className="td-number" field="descuentoAmount" title="Descuento" />
+        <TableColumn className="td-number" field="taxAmount" title="Itbis" />
+        <TableColumn className="td-number" field="isc" title="ISC" />
+        <TableColumn className="td-number" field="isce" title="ISCE" />
+        <TableColumn className="td-number" field="netAmount" title="Neto" />
+        <TableColumn className="td-number" field="interestValue" title="Interes Financiamiento" />
         <TableColumn
           cell={getCellFreeGoods}
-          className="items-center"
+          className="td-number"
           field="freeGoods"
-          title="Seleccionado"
+          title="Free Goods"
         />
       </Table>
     </div>
