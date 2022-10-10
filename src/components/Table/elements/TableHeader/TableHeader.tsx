@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { ColumnsProps } from 'components/Table/constants/Table.interface';
 
 interface TableHeaderProps {
+  /**
+   * Components properties Header Table
+   */
   children?:
     | React.FC<ColumnsProps>
     | React.FC<ColumnsProps>[]

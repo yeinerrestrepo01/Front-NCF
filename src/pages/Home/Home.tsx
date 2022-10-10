@@ -29,7 +29,7 @@ const Home: React.FC = () => {
   const HandleInfoCorrection = (invoiceSetting: IinvoiceSetting) => {
     if (
       invoiceSetting != null &&
-      invoiceSetting.freeGoods > 0 &&
+      invoiceSetting.freeGoods === 0 &&
       (!correctionInfo.find((inf) => inf.id === invoiceSetting.id) || correctionInfo.length === 0)
     ) {
       setcorrectionInfo([...correctionInfo, invoiceSetting]);
