@@ -12,11 +12,13 @@ interface TableNoRecordsProps {
 
 const TableNoRecords: React.FC<TableNoRecordsProps> = ({ colNumber }) => {
   return (
-    <tr className={styles.containerNoData}>
-      <td colSpan={colNumber}>
-        <NoData />
-      </td>
-    </tr>
+    <tbody>
+      <tr className={styles.containerNoData}>
+        <td colSpan={colNumber}>
+          <NoData />
+        </td>
+      </tr>
+    </tbody>
   );
 };
 

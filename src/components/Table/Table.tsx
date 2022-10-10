@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ColumnsProps, DataResult } from './constants/Table.interface';
-import { TableBody, TableHeader, TableSkeleton } from 'components/Table/elements';
+import { TableBody, TableHeader, TableNoRecords, TableSkeleton } from 'components/Table/elements';
 import styles from './Table.module.scss';
-import TableNoRecords from 'components/TableNoRecords/TableNoRecords';
 
 interface TableProps {
   /**
    * Components properties Table
    */
-  children?:
+  children:
     | React.FC<ColumnsProps>
     | React.FC<ColumnsProps>[]
     | React.ReactElement<ColumnsProps>
@@ -32,6 +31,38 @@ interface TableProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onRowClick?: (i: any) => void;
 }
+
+/**
+ * Represents the [Table component]({% slug overview_grid %}).
+ *
+ * @example
+ * ```jsx
+ * class App extends React.Component {
+ *    constructor(props) {
+ *        super(props);
+ *        this.state = {
+ *            data: [
+ *                { 'foo': 'A1', 'bar': 'B1' },
+ *                { 'foo': 'A2', 'bar': 'B2' },
+ *                { 'foo': 'A3', 'bar': 'B2' }
+ *            ]
+ *        };
+ *    }
+ *    render() {
+ *        return (
+ *            <Table
+ *                data={this.state.data}
+ *                reorderable={true}
+ *            >
+ *                <TableColumn field="foo" />
+ *                <TableColumn field="bar" />
+ *            </Grid>
+ *        );
+ *    }
+ * }
+ * ReactDOM.render(<App />, document.querySelector('my-app'));
+ * ```
+ */
 
 const Table: React.FC<TableProps> = ({ children, className, data, loadingData, onRowClick }) => {
   const [listColTable, setListColTable] = useState<JSX.Element[]>([]);
@@ -80,7 +111,8 @@ const Table: React.FC<TableProps> = ({ children, className, data, loadingData, o
       (data as DataResult).data.map((item, index) => {
         items.push(
           <tr
-            className={styles['row-table']}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            className={`${styles['row-table']} ${(item as any).select ? styles['select-row'] : ''}`}
             onClick={() => onRowClick(item)}
             key={`col_${index + 1}`}
           >
@@ -93,7 +125,8 @@ const Table: React.FC<TableProps> = ({ children, className, data, loadingData, o
       (data as unknown[]).map((item, index) => {
         items.push(
           <tr
-            className={styles['row-table']}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            className={`${styles['row-table']} ${(item as any).select ? styles['select-row'] : ''}`}
             onClick={() => onRowClick(item)}
             key={`col_${index + 1}`}
           >
@@ -131,7 +164,6 @@ const Table: React.FC<TableProps> = ({ children, className, data, loadingData, o
 };
 
 Table.defaultProps = {
-  children: null,
   className: null,
   data: null,
   loadingData: false,
@@ -139,7 +171,7 @@ Table.defaultProps = {
 };
 
 Table.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.array.isRequired,
   className: PropTypes.string,
   data: PropTypes.any,
   loadingData: PropTypes.bool,

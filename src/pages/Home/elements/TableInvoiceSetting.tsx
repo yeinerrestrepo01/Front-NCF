@@ -5,14 +5,17 @@ import { Checksolid, NoChecksolid } from 'global/icons';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { processTable } from 'components/Table/constants/Table.constant';
 
 interface TableInvoiceSettingProps {
+  correctionInfo?: IinvoiceSetting[];
   data?: IinvoiceSetting[];
-  HandleInfoCorrection: (invoiceSetting: IinvoiceSetting) => void;
+  HandleInfoCorrection: (i: IinvoiceSetting) => void;
   loading?: boolean;
 }
 
 const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
+  correctionInfo,
   data,
   HandleInfoCorrection,
   loading,
@@ -34,7 +37,15 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
     <div className="container-fluid">
       <Table
         className="table table-bordered"
-        data={data}
+        data={processTable(
+          data.map((item: IinvoiceSetting) => {
+            if (correctionInfo.length > 0) {
+              item.select = correctionInfo.some((x) => x.id === item.id);
+            }
+            return item;
+          }) ?? [],
+          {}
+        )}
         loadingData={loading}
         onRowClick={HandleInfoCorrection}
       >
@@ -59,11 +70,13 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
 };
 
 TableInvoiceSetting.defaultProps = {
+  correctionInfo: [],
   data: [],
   loading: false,
 };
 
 TableInvoiceSetting.propTypes = {
+  correctionInfo: PropTypes.any,
   data: PropTypes.any,
   HandleInfoCorrection: PropTypes.func.isRequired,
   loading: PropTypes.bool,

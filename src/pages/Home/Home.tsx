@@ -70,6 +70,7 @@ const Home: React.FC = () => {
       <div className="col-12 mt-3">
         <h2>Documento Original</h2>
         <TableInvoiceSetting
+          correctionInfo={correctionInfo}
           data={data}
           HandleInfoCorrection={HandleInfoCorrection}
           loading={isLoading}

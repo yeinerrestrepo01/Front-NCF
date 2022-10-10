@@ -4,6 +4,10 @@ import { ColumnsProps } from 'components/Table/constants/Table.interface';
 
 type TableColumnProps = ColumnsProps;
 
+/**
+ * @hidden
+ */
+
 const TableColumn: React.FC<TableColumnProps> = ({ field, headerClassName, title, width }) => {
   return (
     <>
@@ -17,7 +21,6 @@ const TableColumn: React.FC<TableColumnProps> = ({ field, headerClassName, title
 TableColumn.defaultProps = {
   className: null,
   field: null,
-  format: null,
   headerClassName: null,
   id: null,
   locked: false,
@@ -30,7 +33,6 @@ TableColumn.defaultProps = {
 TableColumn.propTypes = {
   className: PropTypes.string,
   field: PropTypes.string,
-  format: PropTypes.string,
   headerClassName: PropTypes.string,
   id: PropTypes.string,
   locked: PropTypes.bool,

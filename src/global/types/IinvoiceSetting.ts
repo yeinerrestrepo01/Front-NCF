@@ -17,6 +17,7 @@ export interface IinvoiceSetting {
   isc: number;
   isce: number;
   interestValue: number;
+  select?: boolean;
   transport: number;
   netAmount: number;
   groupPrice: string;
