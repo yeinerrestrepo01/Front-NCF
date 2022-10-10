@@ -25,10 +25,10 @@ const DocumentCorrection: React.FC<DocumentCorrectionProps> = ({ handleSearchInv
         {() => (
           <Form>
             <div className="form-group mt-4">
-              <TextInput name="codigoCliente" label="NCF Origen" required />
+              <TextInput name="nfcOrigen" label="NCF Origen" required />
             </div>
             <div className="form-group mt-4">
-              <TextInput name="nfcOrigen" label="Codigo Cliente" required />
+              <TextInput name="codigoCliente" label="Codigo Cliente" required />
             </div>
             <div className="form-group mt-4">
               <TextInput name="tikect" label="Id de reclamacion" />

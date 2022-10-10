@@ -30,25 +30,21 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
   return (
     <div>
       {data?.length > 0 ? (
-        <Table className="table" data={data} onRowClick={HandleInfoCorrection}>
+        <Table className="table table-bordered" data={data} onRowClick={HandleInfoCorrection}>
           <TableColumn field="idProduct" title="Codigo Producto" />
-          <TableColumn className="items-center" field="amount" title="amount" />
-          <TableColumn className="items-center" field="brutoTotal" title="Precio Bruto" />
-          <TableColumn className="items-center" field="descuentoAmount" title="Descuento" />
-          <TableColumn className="items-center" field="taxAmount" title="Itbis" />
-          <TableColumn className="items-center" field="isc" title="ISC" />
-          <TableColumn className="items-center" field="isce" title="ISCE" />
-          <TableColumn className="items-center" field="netAmount" title="Neto" />
-          <TableColumn
-            className="items-center"
-            field="interestValue"
-            title="Interes Financiamiento"
-          />
+          <TableColumn className="items-center" field="amount" title="QTY" />
+          <TableColumn className="td-number" field="brutoTotal" title="Precio Bruto" />
+          <TableColumn className="td-number" field="descuentoAmount" title="Descuento" />
+          <TableColumn className="td-number" field="taxAmount" title="ITBIS" />
+          <TableColumn className="td-number" field="isc" title="ISC" />
+          <TableColumn className="td-number" field="isce" title="ISCE" />
+          <TableColumn className="td-number" field="netAmount" title="Neto" />
+          <TableColumn className="td-number" field="interestValue" title="Interes Financiamiento" />
           <TableColumn
             cell={getCellFreeGoods}
             className="items-center"
             field="freeGoods"
-            title="Seleccionado"
+            title="free Goods"
           />
         </Table>
       ) : (

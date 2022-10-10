@@ -17,22 +17,22 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
     <div className="mt-3">
       {data.length > 0 ? (
         <>
-          <Table className="table" data={data}>
+          <Table className="table table-bordered" data={data}>
             <TableColumn field="idProduct" title="Codigo Producto" />
-            <TableColumn className="items-center" field="amount" title="QTY" />
-            <TableColumn className="items-center" field="brutoTotal" title="Precio Bruto" />
-            <TableColumn className="items-center" field="descuentoAmount" title="Descuento" />
-            <TableColumn className="items-center" field="taxAmount" title="Itbis" />
-            <TableColumn className="items-center" field="isc" title="ISC" />
-            <TableColumn className="items-center" field="isce" title="ISCE" />
-            <TableColumn className="items-center" field="netAmount" title="Neto" />
+            <TableColumn className="itd-number" field="amount" title="QTY" />
+            <TableColumn className="td-number" field="brutoTotal" title="Precio Bruto" />
+            <TableColumn className="td-number" field="descuentoAmount" title="Descuento" />
+            <TableColumn className="td-number" field="taxAmount" title="Itbis" />
+            <TableColumn className="td-number" field="isc" title="ISC" />
+            <TableColumn className="td-number" field="isce" title="ISCE" />
+            <TableColumn className="td-number" field="netAmount" title="Neto" />
             <TableColumn
-              className="items-center"
+              className="td-number"
               field="interestValue"
               title="Interes Financiamiento"
             />
           </Table>
-          <div className="mt-3">
+          <div className="mt-3 mb-3">
             <button
               type="button"
               className="btn btn-warning"
