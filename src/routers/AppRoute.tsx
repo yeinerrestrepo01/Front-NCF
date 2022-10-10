@@ -1,13 +1,19 @@
 import BackDrop from 'components/BackDrop/BackDrop';
-import Homelayout from 'layouts/Homelayout/Homelayout';
-import React, { Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { lazy, Suspense } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+const ErrorPage = lazy(() => import('pages/ErrorPage/ErrorPage'));
+const Homelayout = lazy(() => import('layouts/Homelayout/Homelayout'));
+const Page404 = lazy(() => import('pages/Page404/Page404'));
 
 const AppRoute: React.FC = () => {
   return (
     <Suspense fallback={<BackDrop show />}>
       <Routes>
         <Route element={<Homelayout />} path="/*" />
+        <Route path="error" element={<ErrorPage />} />
+        <Route element={<Page404 />} path="404" />
+        <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
     </Suspense>
   );
