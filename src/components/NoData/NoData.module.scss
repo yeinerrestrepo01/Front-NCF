@@ -1,0 +1,22 @@
+.noData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: #cccccc;
+  padding: 30px !important;
+
+  svg {
+    height: 150px;
+    width: 100px;
+
+    path {
+      fill: rgba(0, 0, 0, 0.5);
+    }
+  }
+  span {
+    margin-top: 10px;
+  }
+}

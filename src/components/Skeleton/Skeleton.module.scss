@@ -1,0 +1,40 @@
+.skeleton {
+  border-radius: 2px;
+  border-color: #edf2f7 !important;
+  box-shadow: none !important;
+  opacity: 0.4;
+  background: #edf2f7;
+  background-clip: padding-box !important;
+  cursor: default;
+  color: transparent !important;
+  animation-name: skeleton;
+  -webkit-animation-name: skeleton;
+  -webkit-animation-duration: 0.8s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &.margin {
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes skeleton {
+  from {
+    border-color: #f2f2f2;
+    background: #f2f2f2;
+  }
+  to {
+    border-color: #cccccc;
+    background: #cccccc;
+  }
+}
