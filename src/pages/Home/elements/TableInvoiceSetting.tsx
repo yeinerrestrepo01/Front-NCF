@@ -31,7 +31,7 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
   };
 
   return (
-    <div>
+    <div className="container-fluid">
       <Table
         className="table table-bordered"
         data={data}

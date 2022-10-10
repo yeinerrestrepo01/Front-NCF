@@ -14,7 +14,7 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
   HandlenSendCorrection,
 }) => {
   return (
-    <div className="mt-3">
+    <div className="container-fluid mt-3">
       {data.length > 0 ? (
         <>
           <Table className="table table-bordered" data={data}>
