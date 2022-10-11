@@ -22,6 +22,10 @@ interface TableProps {
    */
   data?: unknown[] | DataResult | null;
   /**
+   * Show selected columns
+   */
+  isSelectRow?: boolean;
+  /**
    * Shows the loading of the data in the table
    */
   loadingData?: boolean;
@@ -64,7 +68,14 @@ interface TableProps {
  * ```
  */
 
-const Table: React.FC<TableProps> = ({ children, className, data, loadingData, onRowClick }) => {
+const Table: React.FC<TableProps> = ({
+  children,
+  className,
+  data,
+  isSelectRow,
+  loadingData,
+  onRowClick,
+}) => {
   const [listColTable, setListColTable] = useState<JSX.Element[]>([]);
   const [columnsCount, setColumnsCount] = useState<number>(0);
 
@@ -108,12 +119,14 @@ const Table: React.FC<TableProps> = ({ children, className, data, loadingData, o
   const renderBody = useCallback(() => {
     const items: JSX.Element[] = [];
     if (!!(data as DataResult)?.data) {
-      (data as DataResult).data.map((item, index) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (data as DataResult).data.map((item: any, index) => {
         items.push(
           <tr
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            className={`${styles['row-table']} ${(item as any).select ? styles['select-row'] : ''}`}
-            onClick={() => onRowClick(item)}
+            className={`${styles['row-table']} ${
+              item.select && isSelectRow ? styles['select-row'] : ''
+            }`}
+            onClick={() => !!onRowClick && onRowClick(item)}
             key={`col_${index + 1}`}
           >
             {getTdata(item)}
@@ -122,12 +135,14 @@ const Table: React.FC<TableProps> = ({ children, className, data, loadingData, o
       });
       setListColTable(items);
     } else {
-      (data as unknown[]).map((item, index) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (data as unknown[]).map((item: any, index) => {
         items.push(
           <tr
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            className={`${styles['row-table']} ${(item as any).select ? styles['select-row'] : ''}`}
-            onClick={() => onRowClick(item)}
+            className={`${styles['row-table']} ${
+              item.select && isSelectRow ? styles['select-row'] : ''
+            }`}
+            onClick={() => !!onRowClick && onRowClick(item)}
             key={`col_${index + 1}`}
           >
             {getTdata(item)}
@@ -136,7 +151,7 @@ const Table: React.FC<TableProps> = ({ children, className, data, loadingData, o
       });
       setListColTable(items);
     }
-  }, [data, getTdata, onRowClick]);
+  }, [data, getTdata, isSelectRow, onRowClick]);
 
   useEffect(() => {
     if (!!data) {
@@ -166,6 +181,7 @@ const Table: React.FC<TableProps> = ({ children, className, data, loadingData, o
 Table.defaultProps = {
   className: null,
   data: null,
+  isSelectRow: false,
   loadingData: false,
   onRowClick: null,
 };
@@ -174,6 +190,7 @@ Table.propTypes = {
   children: PropTypes.array.isRequired,
   className: PropTypes.string,
   data: PropTypes.any,
+  isSelectRow: PropTypes.bool,
   loadingData: PropTypes.bool,
   onRowClick: PropTypes.func,
 };

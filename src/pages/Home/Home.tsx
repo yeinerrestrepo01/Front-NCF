@@ -9,11 +9,12 @@ import {
 } from 'pages/Home/elements';
 import { useCorrectInvoice, useInvoiceSetting } from 'pages/Home/services';
 import { CorrectionForm } from 'pages/Home/constants/Home.interface';
+import { dataPrueba } from './constants/Home.constant';
 
 const Home: React.FC = () => {
   const [invoice, setInvoice] = useState(null);
   const [invoceCustomer, setInvoceCustomer] = useState(null);
-  const [correctionInfo, setcorrectionInfo] = useState<IinvoiceSetting[]>([]);
+  const [correctionInfo, setCorrectionInfo] = useState<IinvoiceSetting[]>([]);
 
   const { data, isLoading } = useInvoiceSetting(invoice, invoceCustomer);
   const { mutate, isLoading: loadingCorrection } = useCorrectInvoice();
@@ -32,7 +33,7 @@ const Home: React.FC = () => {
       invoiceSetting.freeGoods === 0 &&
       (!correctionInfo.find((inf) => inf.id === invoiceSetting.id) || correctionInfo.length === 0)
     ) {
-      setcorrectionInfo([...correctionInfo, invoiceSetting]);
+      setCorrectionInfo([...correctionInfo, invoiceSetting]);
     }
   };
 
@@ -64,6 +65,12 @@ const Home: React.FC = () => {
     }
   };
 
+  const handleDelteItemCorrection = (item: IinvoiceSetting) => {
+    if (correctionInfo.length > 0 && correctionInfo.some((i) => i.id === item.id)) {
+      setCorrectionInfo(correctionInfo.filter((x) => x.id !== item.id));
+    }
+  };
+
   return (
     <div className="container mt-4">
       <DocumentCorrection handleSearchInvoice={handleSearchInvoice} />
@@ -71,7 +78,7 @@ const Home: React.FC = () => {
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          data={data}
+          data={dataPrueba}
           HandleInfoCorrection={HandleInfoCorrection}
           loading={isLoading}
         />
@@ -83,6 +90,7 @@ const Home: React.FC = () => {
           <hr></hr>
           <TableInvocecorrection
             data={correctionInfo}
+            handleDelteItemCorrection={handleDelteItemCorrection}
             HandlenSendCorrection={HandlenSendCorrection}
           />
         </div>

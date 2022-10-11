@@ -6,6 +6,7 @@ import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { processTable } from 'components/Table/constants/Table.constant';
+import styles from './TableInvoiceSetting.module.scss';
 
 interface TableInvoiceSettingProps {
   correctionInfo?: IinvoiceSetting[];
@@ -41,11 +42,14 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
           data.map((item: IinvoiceSetting) => {
             if (correctionInfo.length > 0) {
               item.select = correctionInfo.some((x) => x.id === item.id);
+            } else {
+              item.select = false;
             }
             return item;
           }) ?? [],
           {}
         )}
+        isSelectRow
         loadingData={loading}
         onRowClick={HandleInfoCorrection}
       >
@@ -60,7 +64,7 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
         <TableColumn className="td-number" field="interestValue" title="Interes Financiamiento" />
         <TableColumn
           cell={getCellFreeGoods}
-          className="td-number"
+          className={styles.center}
           field="freeGoods"
           title="Free Goods"
         />

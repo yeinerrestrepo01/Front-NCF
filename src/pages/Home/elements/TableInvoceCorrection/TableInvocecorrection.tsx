@@ -1,18 +1,40 @@
 import { Table } from 'components';
+import { GridCellProps } from 'components/Table/constants/Table.interface';
 import TableColumn from 'components/Table/elements/TableColumn/TableColumn';
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { MinusSvg } from 'global/icons';
+import styles from './TableInvoceCorrection.module.scss';
 
 interface TableInvoiceSCorrectionProps {
   data: IinvoiceSetting[];
+  handleDelteItemCorrection: (item: IinvoiceSetting) => void;
   HandlenSendCorrection: (o: IInvoiceDocument[], c: IInvoiceDocument[]) => void;
 }
 
 const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
   data,
+  handleDelteItemCorrection,
   HandlenSendCorrection,
 }) => {
+  const getCellDelete = ({ dataItem, field }: GridCellProps) => {
+    if (field === 'delete') {
+      return (
+        <button
+          className={styles.button}
+          onClick={() => handleDelteItemCorrection(dataItem)}
+          title="Eliminar"
+          type="button"
+        >
+          <MinusSvg className={styles.button__delete} />
+        </button>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="container-fluid mt-3">
       {data.length > 0 ? (
@@ -31,6 +53,7 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
               field="interestValue"
               title="Interes Financiamiento"
             />
+            <TableColumn className={styles.center} field="delete" cell={getCellDelete} />
           </Table>
           <div className="mt-3 mb-3">
             <button
@@ -47,6 +70,12 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
       )}
     </div>
   );
+};
+
+TableInvocecorrection.propTypes = {
+  data: PropTypes.any.isRequired,
+  handleDelteItemCorrection: PropTypes.func.isRequired,
+  HandlenSendCorrection: PropTypes.func.isRequired,
 };
 
 export default TableInvocecorrection;
