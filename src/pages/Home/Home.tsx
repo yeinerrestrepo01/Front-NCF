@@ -78,7 +78,7 @@ const Home: React.FC = () => {
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          data={dataPrueba}
+          data={data}
           HandleInfoCorrection={HandleInfoCorrection}
           loading={isLoading}
         />
