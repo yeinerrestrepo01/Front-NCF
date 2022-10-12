@@ -1,5 +1,5 @@
 import { Table } from 'components';
-import { GridCellProps } from 'components/Table/constants/Table.interface';
+import { GridCellProps, TableRowClickEvent } from 'components/Table/constants/Table.interface';
 import { TableColumn } from 'components/Table/elements';
 import { Checksolid, NoChecksolid } from 'global/icons';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
@@ -11,14 +11,14 @@ import styles from './TableInvoiceSetting.module.scss';
 interface TableInvoiceSettingProps {
   correctionInfo?: IinvoiceSetting[];
   data?: IinvoiceSetting[];
-  HandleInfoCorrection: (i: IinvoiceSetting) => void;
+  handleInfoCorrection: (i: IinvoiceSetting) => void;
   loading?: boolean;
 }
 
 const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
   correctionInfo,
   data,
-  HandleInfoCorrection,
+  handleInfoCorrection,
   loading,
 }) => {
   const getCellFreeGoods = ({ dataItem, field }: GridCellProps) => {
@@ -32,6 +32,10 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
       return resp;
     }
     return null;
+  };
+
+  const handleClick = (e: TableRowClickEvent) => {
+    handleInfoCorrection(e.dataItem);
   };
 
   return (
@@ -51,7 +55,7 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
         )}
         isSelectRow
         loadingData={loading}
-        onRowClick={HandleInfoCorrection}
+        onRowClick={handleClick}
       >
         <TableColumn field="idProduct" title="Codigo Producto" />
         <TableColumn className="text-center" field="amount" title="QTY" />
@@ -82,7 +86,7 @@ TableInvoiceSetting.defaultProps = {
 TableInvoiceSetting.propTypes = {
   correctionInfo: PropTypes.any,
   data: PropTypes.any,
-  HandleInfoCorrection: PropTypes.func.isRequired,
+  handleInfoCorrection: PropTypes.func.isRequired,
   loading: PropTypes.bool,
 };
 

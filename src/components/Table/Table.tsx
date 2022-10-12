@@ -1,40 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { ColumnsProps, DataResult } from './constants/Table.interface';
-import { TableBody, TableHeader, TableNoRecords, TableSkeleton } from 'components/Table/elements';
+import { ColumnsProps, DataResult, TableProps } from 'components/Table/constants/Table.interface';
+import {
+  CellNumberInput,
+  TableBody,
+  TableHeader,
+  TableNoRecords,
+  TableSkeleton,
+} from 'components/Table/elements';
 import styles from './Table.module.scss';
-
-interface TableProps {
-  /**
-   * Components properties Table
-   */
-  children:
-    | React.FC<ColumnsProps>
-    | React.FC<ColumnsProps>[]
-    | React.ReactElement<ColumnsProps>
-    | React.ReactElement<ColumnsProps>[];
-  /**
-   * Sets a class of the Table DOM element.
-   */
-  className?: string;
-  /**
-   * Sets the data of the Table ([see example]({% slug paging_Table %})). If you use paging, the `data` option has to contain only the items for the current page.
-   */
-  data?: unknown[] | DataResult | null;
-  /**
-   * Show selected columns
-   */
-  isSelectRow?: boolean;
-  /**
-   * Shows the loading of the data in the table
-   */
-  loadingData?: boolean;
-  /**
-   * Fires when the user clicks a row.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onRowClick?: (i: any) => void;
-}
 
 /**
  * Represents the [Table component]({% slug overview_grid %}).
@@ -72,9 +46,11 @@ const Table: React.FC<TableProps> = ({
   children,
   className,
   data,
+  editName,
   isSelectRow,
   loadingData,
   onRowClick,
+  onItemRowChangue,
 }) => {
   const [listColTable, setListColTable] = useState<JSX.Element[]>([]);
   const [columnsCount, setColumnsCount] = useState<number>(0);
@@ -87,9 +63,45 @@ const Table: React.FC<TableProps> = ({
     };
   }, [children]);
 
-  const getTdata = useCallback(
+  const cellInput = useCallback(
+    (dataField: unknown, col: ColumnsProps) => {
+      switch (col.typeInput) {
+        case 'number':
+          return <CellNumberInput column={col} data={dataField} onChange={onItemRowChangue} />;
+        default:
+          return null;
+      }
+    },
+    [onItemRowChangue]
+  );
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getCellTable = useCallback((dataField: any, reg: ColumnsProps) => {
+    return (
+      <td className={reg.className} key={`td_${reg.field}`}>
+        {!!reg.cell ? <reg.cell dataItem={dataField} field={reg.field} /> : dataField[reg.field]}
+      </td>
+    );
+  }, []);
+
+  const getCellEdit = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (dataField: any) => {
+    (dataField: any, reg: ColumnsProps) => {
+      if (reg.typeInput) {
+        return (
+          <td className={reg.className} key={`td_${reg.field}`}>
+            {cellInput(dataField, reg)}
+          </td>
+        );
+      } else {
+        return getCellTable(dataField, reg);
+      }
+    },
+    [cellInput, getCellTable]
+  );
+
+  const getTdata = useCallback(
+    (dataField: unknown) => {
       const columns: ColumnsProps[] = [];
       const listCol: JSX.Element[] = [];
 
@@ -101,56 +113,41 @@ const Table: React.FC<TableProps> = ({
       });
 
       columns.map((reg) => {
-        listCol.push(
-          <td className={reg.className} key={`td_${reg.field}`}>
-            {!!reg.cell ? (
-              <reg.cell dataItem={dataField} field={reg.field} />
-            ) : (
-              dataField[reg.field]
-            )}
-          </td>
-        );
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((dataField as any)[editName]) {
+          listCol.push(getCellEdit(dataField, reg));
+        } else {
+          listCol.push(getCellTable(dataField, reg));
+        }
       });
       return listCol;
     },
-    [children]
+    [children, editName, getCellEdit, getCellTable]
   );
 
   const renderBody = useCallback(() => {
     const items: JSX.Element[] = [];
+    let valuesData = null;
     if (!!(data as DataResult)?.data) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (data as DataResult).data.map((item: any, index) => {
-        items.push(
-          <tr
-            className={`${styles['row-table']} ${
-              item.select && isSelectRow ? styles['select-row'] : ''
-            }`}
-            onClick={() => !!onRowClick && onRowClick(item)}
-            key={`col_${index + 1}`}
-          >
-            {getTdata(item)}
-          </tr>
-        );
-      });
-      setListColTable(items);
+      valuesData = (data as DataResult).data;
     } else {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (data as unknown[]).map((item: any, index) => {
-        items.push(
-          <tr
-            className={`${styles['row-table']} ${
-              item.select && isSelectRow ? styles['select-row'] : ''
-            }`}
-            onClick={() => !!onRowClick && onRowClick(item)}
-            key={`col_${index + 1}`}
-          >
-            {getTdata(item)}
-          </tr>
-        );
-      });
-      setListColTable(items);
+      valuesData = data;
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (valuesData as any[]).map((item, index) => {
+      items.push(
+        <tr
+          className={`${styles['row-table']} ${
+            item.select && isSelectRow ? styles['select-row'] : ''
+          }`}
+          onClick={() => !!onRowClick && onRowClick({ dataItem: item })}
+          key={`col_${index + 1}`}
+        >
+          {getTdata(item)}
+        </tr>
+      );
+    });
+    setListColTable(items);
   }, [data, getTdata, isSelectRow, onRowClick]);
 
   useEffect(() => {
@@ -183,6 +180,7 @@ Table.defaultProps = {
   data: null,
   isSelectRow: false,
   loadingData: false,
+  onItemRowChangue: null,
   onRowClick: null,
 };
 
@@ -192,6 +190,7 @@ Table.propTypes = {
   data: PropTypes.any,
   isSelectRow: PropTypes.bool,
   loadingData: PropTypes.bool,
+  onItemRowChangue: PropTypes.func,
   onRowClick: PropTypes.func,
 };
 

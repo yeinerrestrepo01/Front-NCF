@@ -9,7 +9,6 @@ import {
 } from 'pages/Home/elements';
 import { useCorrectInvoice, useInvoiceSetting } from 'pages/Home/services';
 import { CorrectionForm } from 'pages/Home/constants/Home.interface';
-import { dataPrueba } from './constants/Home.constant';
 
 const Home: React.FC = () => {
   const [invoice, setInvoice] = useState(null);
@@ -27,7 +26,7 @@ const Home: React.FC = () => {
     }
   };
 
-  const HandleInfoCorrection = (invoiceSetting: IinvoiceSetting) => {
+  const handleInfoCorrection = (invoiceSetting: IinvoiceSetting) => {
     if (
       invoiceSetting != null &&
       invoiceSetting.freeGoods === 0 &&
@@ -37,15 +36,12 @@ const Home: React.FC = () => {
     }
   };
 
-  const HandlenSendCorrection = (
-    documentoOriginal: IInvoiceDocument[],
-    documentoCorrecion: IInvoiceDocument[]
-  ) => {
-    if (setInvoice.length > 0 && invoceCustomer.length > 0) {
+  const handlenSendCorrection = (documentoCorrecion: IInvoiceDocument[]) => {
+    if (invoice?.length > 0 && invoceCustomer?.length > 0) {
       mutate(
         {
-          documentoOriginal: [...documentoOriginal],
-          documentoCorrecion: [...documentoCorrecion],
+          documentoOriginal: correctionInfo,
+          documentoCorrecion: documentoCorrecion,
           solitudSoporteDocumento: {
             idCustumer: invoceCustomer,
             ncf: invoice,
@@ -78,8 +74,8 @@ const Home: React.FC = () => {
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          data={dataPrueba}
-          HandleInfoCorrection={HandleInfoCorrection}
+          data={data}
+          handleInfoCorrection={handleInfoCorrection}
           loading={isLoading}
         />
       </div>
@@ -91,7 +87,7 @@ const Home: React.FC = () => {
           <TableInvocecorrection
             data={correctionInfo}
             handleDelteItemCorrection={handleDelteItemCorrection}
-            HandlenSendCorrection={HandlenSendCorrection}
+            HandlenSendCorrection={handlenSendCorrection}
           />
         </div>
       ) : (
