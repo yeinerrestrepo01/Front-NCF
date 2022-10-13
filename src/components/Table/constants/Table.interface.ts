@@ -56,7 +56,7 @@ export type DataResult = {
   total: number;
 };
 
-export type TypesInputs = 'text' | 'number';
+export type TypesInputs = 'text' | 'number' | 'money';
 
 /**
  * The props of the Colum table component.

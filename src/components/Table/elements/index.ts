@@ -1,3 +1,4 @@
+export { default as CellMoneyInput } from './CellMoneyInput/CellMoneyInput';
 export { default as CellNumberInput } from './CellNumberInput/CellNumberInput';
 export { default as CellTextInput } from './CellTextInput/CellTextInput';
 export { default as TableBody } from './TableBody/TableBody';

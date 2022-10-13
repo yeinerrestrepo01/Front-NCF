@@ -2,7 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ColumnsProps, DataResult, TableProps } from 'components/Table/constants/Table.interface';
 import {
+  CellMoneyInput,
   CellNumberInput,
+  CellTextInput,
   TableBody,
   TableHeader,
   TableNoRecords,
@@ -68,6 +70,10 @@ const Table: React.FC<TableProps> = ({
       switch (col.typeInput) {
         case 'number':
           return <CellNumberInput column={col} data={dataField} onChange={onItemRowChangue} />;
+        case 'money':
+          return <CellMoneyInput column={col} data={dataField} onChange={onItemRowChangue} />;
+        case 'text':
+          return <CellTextInput column={col} data={dataField} onChange={onItemRowChangue} />;
         default:
           return null;
       }

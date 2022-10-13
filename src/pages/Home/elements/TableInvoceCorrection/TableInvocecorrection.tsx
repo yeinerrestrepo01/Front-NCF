@@ -19,7 +19,7 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
   handleDelteItemCorrection,
   HandlenSendCorrection,
 }) => {
-  const [invoceCorrection, setInvoceCorrection] = useState<IinvoiceSetting[]>([]);
+  const [invoceCorrection, setInvoceCorrection] = useState<IinvoiceSetting[]>([...data]);
   const [rowEdit, setRowEdit] = useState(null);
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
               className="td-number"
               field="interestValue"
               title="Interes Financiamiento"
-              typeInput="number"
+              typeInput="money"
             />
             <TableColumn className={styles.center} field="delete" cell={getCellDelete} />
           </Table>
