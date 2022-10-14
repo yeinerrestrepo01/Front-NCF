@@ -26,13 +26,13 @@ const Home: React.FC = () => {
     }
   };
 
-  const handleInfoCorrection = (invoiceSetting: IinvoiceSetting) => {
+  const hanldeSetCorrection = (invoiceSetting: IinvoiceSetting) => {
     if (
       invoiceSetting != null &&
       invoiceSetting.freeGoods === 0 &&
       (!correctionInfo.find((inf) => inf.id === invoiceSetting.id) || correctionInfo.length === 0)
     ) {
-      setCorrectionInfo([...correctionInfo, invoiceSetting]);
+      setCorrectionInfo([...correctionInfo, { ...invoiceSetting }]);
     }
   };
 
@@ -52,6 +52,7 @@ const Home: React.FC = () => {
           onSuccess: (res) => {
             if (res.estadoHttp === 200) {
               alert('Proceso realizado exitosamente.');
+              setCorrectionInfo([]);
             } else {
               alert('No se pudo realizar la ejecucion del procso exitosamente');
             }
@@ -75,10 +76,11 @@ const Home: React.FC = () => {
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
           data={data}
-          handleInfoCorrection={handleInfoCorrection}
+          handleInfoCorrection={hanldeSetCorrection}
           loading={isLoading}
         />
       </div>
+      <br />
 
       {correctionInfo.length > 0 ? (
         <div className="col-12 mt-4">

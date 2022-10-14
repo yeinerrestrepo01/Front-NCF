@@ -40,6 +40,10 @@ export interface TableProps {
    * Fires when the user clicks a row.
    */
   onRowClick?: (event: TableRowClickEvent) => void;
+  /**
+   * Thead class css
+   */
+  theadClassName?: string;
 }
 
 /**
@@ -56,7 +60,7 @@ export type DataResult = {
   total: number;
 };
 
-export type TypesInputs = 'text' | 'number';
+export type TypesInputs = 'text' | 'number' | 'money';
 
 /**
  * The props of the Colum table component.

@@ -11,9 +11,10 @@ interface TableHeaderProps {
     | React.FC<ColumnsProps>[]
     | React.ReactElement<ColumnsProps>
     | React.ReactElement<ColumnsProps>[];
+  className?: string;
 }
 
-const TableHeader: React.FC<TableHeaderProps> = ({ children }) => {
+const TableHeader: React.FC<TableHeaderProps> = ({ children, className }) => {
   const renderTheader = () => {
     const columns: unknown[] = [];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,7 +29,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({ children }) => {
 
   return (
     <>
-      <thead className="thead-dark">
+      <thead className={className}>
         <tr>
           <>{renderTheader()}</>
         </tr>

@@ -2,7 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ColumnsProps, DataResult, TableProps } from 'components/Table/constants/Table.interface';
 import {
+  CellMoneyInput,
   CellNumberInput,
+  CellTextInput,
   TableBody,
   TableHeader,
   TableNoRecords,
@@ -51,6 +53,7 @@ const Table: React.FC<TableProps> = ({
   loadingData,
   onRowClick,
   onItemRowChangue,
+  theadClassName,
 }) => {
   const [listColTable, setListColTable] = useState<JSX.Element[]>([]);
   const [columnsCount, setColumnsCount] = useState<number>(0);
@@ -68,6 +71,10 @@ const Table: React.FC<TableProps> = ({
       switch (col.typeInput) {
         case 'number':
           return <CellNumberInput column={col} data={dataField} onChange={onItemRowChangue} />;
+        case 'money':
+          return <CellMoneyInput column={col} data={dataField} onChange={onItemRowChangue} />;
+        case 'text':
+          return <CellTextInput column={col} data={dataField} onChange={onItemRowChangue} />;
         default:
           return null;
       }
@@ -163,7 +170,7 @@ const Table: React.FC<TableProps> = ({
   return (
     <>
       <table className={`${styles.table} ${className}`}>
-        <TableHeader>{children}</TableHeader>
+        <TableHeader className={theadClassName}>{children}</TableHeader>
         {loadingData && <TableSkeleton colNumber={columnsCount} />}
         {listColTable.length > 0 && !loadingData ? (
           <TableBody data={listColTable} />
@@ -182,6 +189,7 @@ Table.defaultProps = {
   loadingData: false,
   onItemRowChangue: null,
   onRowClick: null,
+  theadClassName: null,
 };
 
 Table.propTypes = {
@@ -192,6 +200,7 @@ Table.propTypes = {
   loadingData: PropTypes.bool,
   onItemRowChangue: PropTypes.func,
   onRowClick: PropTypes.func,
+  theadClassName: PropTypes.string,
 };
 
 export default Table;

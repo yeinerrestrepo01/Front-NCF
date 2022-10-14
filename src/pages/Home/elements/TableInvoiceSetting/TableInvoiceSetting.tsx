@@ -56,6 +56,7 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
         isSelectRow
         loadingData={loading}
         onRowClick={handleClick}
+        theadClassName="thead-dark"
       >
         <TableColumn field="idProduct" title="Codigo Producto" />
         <TableColumn className="text-center" field="amount" title="QTY" />
