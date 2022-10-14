@@ -9,7 +9,6 @@ import {
 } from 'pages/Home/elements';
 import { useCorrectInvoice, useInvoiceSetting } from 'pages/Home/services';
 import { CorrectionForm } from 'pages/Home/constants/Home.interface';
-import { dataPrueba } from './constants/Home.constant';
 
 const Home: React.FC = () => {
   const [invoice, setInvoice] = useState(null);
@@ -38,7 +37,6 @@ const Home: React.FC = () => {
   };
 
   const handlenSendCorrection = (documentoCorrecion: IInvoiceDocument[]) => {
-    console.log(documentoCorrecion, correctionInfo);
     if (invoice?.length > 0 && invoceCustomer?.length > 0) {
       mutate(
         {
@@ -76,7 +74,7 @@ const Home: React.FC = () => {
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          data={dataPrueba}
+          data={data}
           handleInfoCorrection={handleInfoCorrection}
           loading={isLoading}
         />

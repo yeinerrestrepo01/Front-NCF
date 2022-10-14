@@ -53,6 +53,7 @@ const Table: React.FC<TableProps> = ({
   loadingData,
   onRowClick,
   onItemRowChangue,
+  theadClassName,
 }) => {
   const [listColTable, setListColTable] = useState<JSX.Element[]>([]);
   const [columnsCount, setColumnsCount] = useState<number>(0);
@@ -169,7 +170,7 @@ const Table: React.FC<TableProps> = ({
   return (
     <>
       <table className={`${styles.table} ${className}`}>
-        <TableHeader>{children}</TableHeader>
+        <TableHeader className={theadClassName}>{children}</TableHeader>
         {loadingData && <TableSkeleton colNumber={columnsCount} />}
         {listColTable.length > 0 && !loadingData ? (
           <TableBody data={listColTable} />
