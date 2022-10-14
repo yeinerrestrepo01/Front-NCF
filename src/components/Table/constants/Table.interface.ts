@@ -40,6 +40,10 @@ export interface TableProps {
    * Fires when the user clicks a row.
    */
   onRowClick?: (event: TableRowClickEvent) => void;
+  /**
+   * Thead class css
+   */
+  theadClassName?: string;
 }
 
 /**

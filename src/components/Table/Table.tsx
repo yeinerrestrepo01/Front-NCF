@@ -188,6 +188,7 @@ Table.defaultProps = {
   loadingData: false,
   onItemRowChangue: null,
   onRowClick: null,
+  theadClassName: null,
 };
 
 Table.propTypes = {
@@ -198,6 +199,7 @@ Table.propTypes = {
   loadingData: PropTypes.bool,
   onItemRowChangue: PropTypes.func,
   onRowClick: PropTypes.func,
+  theadClassName: PropTypes.string,
 };
 
 export default Table;

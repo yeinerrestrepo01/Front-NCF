@@ -41,7 +41,7 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
   return (
     <div className="container-fluid">
       <Table
-        className="table table-bordered"
+        // className="table table-bordered"
         data={processTable(
           data.map((item: IinvoiceSetting) => {
             if (correctionInfo.length > 0) {
