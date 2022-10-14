@@ -62,7 +62,7 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
         <TableColumn className="text-center" field="amount" title="QTY" />
         <TableColumn className="td-number" field="brutoTotal" title="Precio Bruto" />
         <TableColumn className="td-number" field="descuentoAmount" title="Descuento" />
-        <TableColumn className="td-number" field="taxAmount" title="Itbis" />
+        <TableColumn className="td-number" field="taxAmount" title="ITBIS" />
         <TableColumn className="td-number" field="isc" title="ISC" />
         <TableColumn className="td-number" field="isce" title="ISCE" />
         <TableColumn className="td-number" field="netAmount" title="Neto" />

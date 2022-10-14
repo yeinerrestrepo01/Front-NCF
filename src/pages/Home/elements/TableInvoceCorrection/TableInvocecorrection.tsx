@@ -98,7 +98,7 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
               title="Descuento"
               typeInput="number"
             />
-            <TableColumn className="td-number" field="taxAmount" title="Itbis" typeInput="number" />
+            <TableColumn className="td-number" field="taxAmount" title="ITBIS" typeInput="number" />
             <TableColumn className="td-number" field="isc" title="ISC" typeInput="number" />
             <TableColumn className="td-number" field="isce" title="ISCE" typeInput="number" />
             <TableColumn className="td-number" field="netAmount" title="Neto" />

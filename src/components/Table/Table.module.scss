@@ -15,8 +15,8 @@ $border_table: rgba(0, 0, 0, 0.05);
 
     thead {
         border: 1px solid $border_table;
-        color: #424242;
-        background-color: #fafafa;
+        color: #ffffff;
+        background-color: #333333;
 
         th {
             padding: 8px 12px;
@@ -50,7 +50,7 @@ $border_table: rgba(0, 0, 0, 0.05);
         }
 
         .select-row {
-            background-color: rgb(0 0 0 / 33%) !important;
+            background-color: #A0A0A0 !important;
         }
     }
 }
