@@ -19,11 +19,21 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
   handleDelteItemCorrection,
   HandlenSendCorrection,
 }) => {
-  const [invoceCorrection, setInvoceCorrection] = useState<IinvoiceSetting[]>([...data]);
+  const [invoceCorrection, setInvoceCorrection] = useState<IinvoiceSetting[]>([]);
   const [rowEdit, setRowEdit] = useState(null);
 
   useEffect(() => {
-    if (data.length > 0) setInvoceCorrection([...data]);
+    if (data.length !== invoceCorrection.length) {
+      const listIds = invoceCorrection.map((item) => item.id);
+      const listInformation = data.map((x) => {
+        if (listIds.includes(x.id)) {
+          return invoceCorrection.find((item) => item.id === x.id);
+        }
+        return x;
+      });
+      setInvoceCorrection([...listInformation]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const getCellDelete = ({ dataItem, field }: GridCellProps) => {
@@ -44,12 +54,19 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
 
   const itemChange = (event: TableItemChangeEvent) => {
     const itemEdit = invoceCorrection;
-    if (itemEdit) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (itemEdit[invoceCorrection.findIndex((x) => x.id === event.dataItem.id)] as any)[
-        event.field
-      ] = event.value;
-      setInvoceCorrection(itemEdit);
+    if (itemEdit.length) {
+      const index = invoceCorrection.findIndex((x) => x.id === event.dataItem.id);
+      itemEdit[index] = { ...itemEdit[index], [event.field]: event.value };
+      const neto =
+        itemEdit[index].brutoTotal -
+        itemEdit[index].descuentoAmount +
+        itemEdit[index].taxAmount +
+        itemEdit[index].isc +
+        itemEdit[index].isce +
+        itemEdit[index].interestValue;
+
+      itemEdit[index] = { ...itemEdit[index], netAmount: neto };
+      setInvoceCorrection([...itemEdit]);
     }
   };
 
@@ -84,7 +101,7 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
             <TableColumn className="td-number" field="taxAmount" title="Itbis" typeInput="number" />
             <TableColumn className="td-number" field="isc" title="ISC" typeInput="number" />
             <TableColumn className="td-number" field="isce" title="ISCE" typeInput="number" />
-            <TableColumn className="td-number" field="netAmount" title="Neto" typeInput="number" />
+            <TableColumn className="td-number" field="netAmount" title="Neto" />
             <TableColumn
               className="td-number"
               field="interestValue"

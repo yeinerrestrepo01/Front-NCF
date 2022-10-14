@@ -18,7 +18,7 @@ const CellNumberInput: React.FC<CellNumberInputProps> = ({ column, data, onChang
     if (onChange)
       onChange({
         dataItem: data,
-        value: event.target.value,
+        value: Number(event.target.value),
         field: column.field,
       });
   };

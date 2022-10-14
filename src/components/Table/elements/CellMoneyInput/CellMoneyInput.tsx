@@ -19,7 +19,7 @@ const CellMoneyInput: React.FC<CellMoneyInputProps> = ({ column, data, onChange 
       if (onChange)
         onChange({
           dataItem: data,
-          value: event.target.value,
+          value: Number(event.target.value),
           field: column.field,
         });
     }
