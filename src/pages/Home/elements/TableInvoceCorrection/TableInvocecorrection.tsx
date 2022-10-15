@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { MinusSvg } from 'global/icons';
 import styles from './TableInvoceCorrection.module.scss';
+import { getFormattedDecimal } from 'global/helpers';
 
 interface TableInvoiceSCorrectionProps {
   data: IinvoiceSetting[];
@@ -65,7 +66,7 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
         itemEdit[index].isce +
         itemEdit[index].interestValue;
 
-      itemEdit[index] = { ...itemEdit[index], netAmount: neto };
+      itemEdit[index] = { ...itemEdit[index], netAmount: getFormattedDecimal(neto) };
       setInvoceCorrection([...itemEdit]);
     }
   };
