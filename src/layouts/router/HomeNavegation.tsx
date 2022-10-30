@@ -3,12 +3,14 @@ import React, { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 const Home = lazy(() => import('pages/Home/Home'));
+const PartialCancellation = lazy(() => import('pages/PartialCancellation/PartialCancellation'));
 
 const HomeNavegation: React.FC = () => {
   return (
     <Suspense fallback={<BackDrop show />}>
       <Routes>
         <Route element={<Home />} path="/" />
+        <Route element={<PartialCancellation />} path="partial" />
         <Route path="*" element={<Navigate to={'404'} replace />} />
       </Routes>
     </Suspense>

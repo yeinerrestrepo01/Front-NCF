@@ -1,0 +1,25 @@
+.button {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+
+    &__delete {
+        width: 20px;
+        height: 20px;
+
+        &:hover {
+            path {
+                fill: #0d6efd;
+            }
+        }
+    }
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
