@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
   return (
@@ -20,13 +21,17 @@ const Header: React.FC = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
-          <NavLink className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} to="/" end>
+          <NavLink
+            className={({ isActive }) => `nav-item ${styles.link} ${isActive ? 'active' : ''}`}
+            to="/"
+            end
+          >
             <span className="nav-link">
               Corrección montos <span className="sr-only"></span>
             </span>
           </NavLink>
           <NavLink
-            className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+            className={({ isActive }) => `nav-item ${styles.link} ${isActive ? 'active' : ''}`}
             to="partial"
             end
           >
