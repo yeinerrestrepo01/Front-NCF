@@ -86,28 +86,17 @@ const TableInvocecorrectionCancellation: React.FC<TableInvocecorrectionCancellat
             onRowClick={(e) => setRowEdit(e.dataItem.id)}
           >
             <TableColumn field="idProduct" title="Codigo Producto" />
-            <TableColumn className="text-center" field="amount" title="QTY" />
-            <TableColumn
-              className="td-number"
-              field="brutoTotal"
-              title="Precio Bruto"
-              typeInput="number"
-            />
-            <TableColumn
-              className="td-number"
-              field="descuentoAmount"
-              title="Descuento"
-              typeInput="number"
-            />
-            <TableColumn className="td-number" field="taxAmount" title="ITBIS" typeInput="number" />
-            <TableColumn className="td-number" field="isc" title="ISC" typeInput="number" />
-            <TableColumn className="td-number" field="isce" title="ISCE" typeInput="number" />
+            <TableColumn className="td-number" field="amount" title="QTY" typeInput="number" />
+            <TableColumn className="td-number" field="brutoTotal" title="Precio Bruto" />
+            <TableColumn className="td-number" field="descuentoAmount" title="Descuento" />
+            <TableColumn className="td-number" field="taxAmount" title="ITBIS" />
+            <TableColumn className="td-number" field="isc" title="ISC" />
+            <TableColumn className="td-number" field="isce" title="ISCE" />
             <TableColumn className="td-number" field="netAmount" title="Neto" />
             <TableColumn
               className="td-number"
               field="interestValue"
               title="Interes Financiamiento"
-              typeInput="money"
             />
             <TableColumn className={styles.center} field="delete" cell={getCellDelete} />
           </Table>
