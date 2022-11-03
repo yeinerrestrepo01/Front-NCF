@@ -29,7 +29,6 @@ const PartialCancellation: React.FC = () => {
   const hanldeSetCorrection = (invoiceSetting: IinvoiceSetting) => {
     if (
       invoiceSetting != null &&
-      invoiceSetting.freeGoods === 0 &&
       (!correctionInfo.find((inf) => inf.id === invoiceSetting.id) || correctionInfo.length === 0)
     ) {
       setCorrectionInfo([...correctionInfo, { ...invoiceSetting }]);
