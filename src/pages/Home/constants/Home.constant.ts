@@ -37,6 +37,8 @@ export const dataPrueba: IinvoiceSetting[] = [
     'transport': 0,
     'netAmount': 0,
     'groupPrice': 'C2',
+    'labor': '001',
+    'fechaPedido': new Date(),
   },
   {
     'id': 85247,
@@ -60,6 +62,8 @@ export const dataPrueba: IinvoiceSetting[] = [
     'transport': 0,
     'netAmount': 19524.88,
     'groupPrice': 'C2',
+    'labor': '001',
+    'fechaPedido': new Date()
   },
   {
     'id': 85248,
@@ -83,6 +87,8 @@ export const dataPrueba: IinvoiceSetting[] = [
     'transport': 0,
     'netAmount': 1400,
     'groupPrice': 'C2',
+    'labor': '001',
+    'fechaPedido': new Date(),
   },
   {
     'id': 85249,
@@ -106,5 +112,7 @@ export const dataPrueba: IinvoiceSetting[] = [
     'transport': 0,
     'netAmount': 617.4,
     'groupPrice': 'C2',
+    'labor': '001',
+    'fechaPedido': new Date(),
   },
 ];

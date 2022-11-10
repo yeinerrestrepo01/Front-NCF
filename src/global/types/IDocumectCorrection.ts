@@ -25,8 +25,8 @@ export interface IInvoiceDocument {
   transport: number;
   netAmount: number;
   groupPrice: string;
-  string: string;
-  FechaPedido: Date;
+  labor: string;
+  fechaPedido: Date;
 }
 
 export interface SolitudSoporteDocumento {
