@@ -21,4 +21,6 @@ export interface IinvoiceSetting {
   transport: number;
   netAmount: number;
   groupPrice: string;
+  Labor: string;
+  FechaPedido: Date;
 }
