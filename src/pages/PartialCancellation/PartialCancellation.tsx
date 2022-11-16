@@ -16,8 +16,8 @@ const PartialCancellation: React.FC = () => {
   const [correctionInfo, setCorrectionInfo] = useState<IinvoiceSetting[]>([]);
 
   const { data, isLoading } = useInvoiceSetting(
-    searchInvoice.nfcOrigen,
-    searchInvoice.codigoCliente
+    searchInvoice?.nfcOrigen,
+    searchInvoice?.codigoCliente
   );
   const { mutate, isLoading: loadingCorrection } = useAnulacionInvoice();
 
