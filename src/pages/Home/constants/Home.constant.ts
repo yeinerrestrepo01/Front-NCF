@@ -63,7 +63,7 @@ export const dataPrueba: IinvoiceSetting[] = [
     'netAmount': 19524.88,
     'groupPrice': 'C2',
     'labor': '001',
-    'fechaPedido': new Date()
+    'fechaPedido': new Date(),
   },
   {
     'id': 85248,

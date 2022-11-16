@@ -11,5 +11,5 @@ export const InitialFormpartialCancellation: PartialCancellationForm = {
 export const validationsFormpartialCancellation = Yup.object({
   codigoCliente: Yup.string().required('Campo Obligatorio'),
   nfcOrigen: Yup.string().required('Campo Obligatorio'),
-  // tikect: Yup.string().required('Campo Obligatorio'),
+  intercompany: Yup.string().required('Campo Obligatorio'),
 });

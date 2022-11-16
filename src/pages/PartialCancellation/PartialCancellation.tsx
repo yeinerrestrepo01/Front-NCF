@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
+import { BackDrop } from 'components';
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import { TableInvoiceSetting } from 'pages/Home/elements';
-import { useCorrectInvoice, useInvoiceSetting } from 'pages/Home/services';
+import { useInvoiceSetting } from 'pages/Home/services';
 import {
   FormPartialCancellation,
   TableInvocecorrectionCancellation,
 } from 'pages/PartialCancellation/elements';
-import { BackDrop } from 'components';
-import { PartialCancellationForm } from './constants/PartialCancellation.interface';
+import { PartialCancellationForm } from 'pages/PartialCancellation/constants/PartialCancellation.interface';
+import { useAnulacionInvoice } from 'pages/PartialCancellation/service';
 
 const PartialCancellation: React.FC = () => {
-  const [invoice, setInvoice] = useState(null);
-  const [invoceCustomer, setInvoceCustomer] = useState(null);
+  const [searchInvoice, setSearchInvoice] = useState<PartialCancellationForm>(null);
   const [correctionInfo, setCorrectionInfo] = useState<IinvoiceSetting[]>([]);
 
-  const { data, isLoading } = useInvoiceSetting(invoice, invoceCustomer);
-  const { mutate, isLoading: loadingCorrection } = useCorrectInvoice();
+  const { data, isLoading } = useInvoiceSetting(
+    searchInvoice.nfcOrigen,
+    searchInvoice.codigoCliente
+  );
+  const { mutate, isLoading: loadingCorrection } = useAnulacionInvoice();
 
   //Funcion para consultat factuas
   const handleSearchInvoice = (search: PartialCancellationForm) => {
     if (search.nfcOrigen.length > 0 && search.codigoCliente.length > 0) {
-      setInvoice(search.nfcOrigen);
-      setInvoceCustomer(search.codigoCliente);
+      setSearchInvoice(search);
     }
   };
 
@@ -36,15 +38,15 @@ const PartialCancellation: React.FC = () => {
   };
 
   const handlenSendCorrection = (documentoCorrecion: IInvoiceDocument[]) => {
-    if (invoice?.length > 0 && invoceCustomer?.length > 0) {
+    if (searchInvoice.nfcOrigen?.length > 0 && searchInvoice.codigoCliente?.length > 0) {
       mutate(
         {
-          documentoOriginal: correctionInfo,
           documentoCorrecion: documentoCorrecion,
-          solitudSoporteDocumento: {
-            idCustumer: invoceCustomer,
-            ncf: invoice,
-            idSupport: '',
+          solicitudAnulacionDto: {
+            idCustumer: searchInvoice.codigoCliente,
+            ncf: searchInvoice.nfcOrigen,
+            idSupport: searchInvoice.tikect,
+            interCompany: searchInvoice.intercompany,
           },
         },
         {
