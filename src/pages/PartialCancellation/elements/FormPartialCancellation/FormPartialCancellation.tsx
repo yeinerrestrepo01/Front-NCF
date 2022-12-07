@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Formik } from 'formik';
-import { TextInput } from 'components';
+import { ResetForm, TextInput } from 'components';
 import {
   InitialFormpartialCancellation,
   validationsFormpartialCancellation,
@@ -10,10 +10,12 @@ import { PartialCancellationForm } from 'pages/PartialCancellation/constants/Par
 
 interface FormPartialCancellationProps {
   handleSearchInvoice: (f: PartialCancellationForm) => void;
+  resetForm?: boolean;
 }
 
 const FormPartialCancellation: React.FC<FormPartialCancellationProps> = ({
   handleSearchInvoice,
+  resetForm,
 }) => {
   return (
     <div>
@@ -43,6 +45,7 @@ const FormPartialCancellation: React.FC<FormPartialCancellationProps> = ({
                 Consultar NCF
               </button>
             </div>
+            <ResetForm isReset={resetForm} />
           </Form>
         )}
       </Formik>
@@ -50,8 +53,13 @@ const FormPartialCancellation: React.FC<FormPartialCancellationProps> = ({
   );
 };
 
+FormPartialCancellation.defaultProps = {
+  resetForm: false,
+};
+
 FormPartialCancellation.propTypes = {
   handleSearchInvoice: PropTypes.func.isRequired,
+  resetForm: PropTypes.bool,
 };
 
 export default FormPartialCancellation;

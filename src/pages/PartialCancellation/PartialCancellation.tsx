@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BackDrop } from 'components';
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
@@ -12,6 +12,7 @@ import { PartialCancellationForm } from 'pages/PartialCancellation/constants/Par
 import { useAnulacionInvoice } from 'pages/PartialCancellation/service';
 
 const PartialCancellation: React.FC = () => {
+  const [resetPages, setResetPages] = useState<boolean>(false);
   const [searchInvoice, setSearchInvoice] = useState<PartialCancellationForm>(null);
   const [correctionInfo, setCorrectionInfo] = useState<IinvoiceSetting[]>([]);
 
@@ -20,6 +21,20 @@ const PartialCancellation: React.FC = () => {
     searchInvoice?.codigoCliente
   );
   const { mutate, isLoading: loadingCorrection } = useAnulacionInvoice();
+
+  useEffect(() => {
+    if (resetPages) {
+      setCorrectionInfo([]);
+      setSearchInvoice(null);
+      setTimeout(() => {
+        setResetPages(false);
+      }, 1000);
+    }
+
+    return () => {
+      setResetPages(false);
+    };
+  }, [resetPages]);
 
   //Funcion para consultat factuas
   const handleSearchInvoice = (search: PartialCancellationForm) => {
@@ -53,7 +68,7 @@ const PartialCancellation: React.FC = () => {
           onSuccess: (res) => {
             if (res.estadoHttp === 200) {
               alert('Proceso realizado exitosamente.');
-              setCorrectionInfo([]);
+              setResetPages(true);
             } else {
               alert('No se pudo realizar la ejecucion del procso exitosamente');
             }
@@ -70,12 +85,12 @@ const PartialCancellation: React.FC = () => {
   };
   return (
     <div className="container mt-4">
-      <FormPartialCancellation handleSearchInvoice={handleSearchInvoice} />
+      <FormPartialCancellation handleSearchInvoice={handleSearchInvoice} resetForm={resetPages} />
       <div className="col-12 mt-3">
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          data={data}
+          data={searchInvoice ? data : []}
           handleInfoCorrection={hanldeSetCorrection}
           loading={isLoading}
         />

@@ -3,12 +3,11 @@
     flex-direction: column;
     gap: 5px;
 
-    // .label {
-    //     padding-left: 5px;
-    //     color: #8395a7;
-    //     font-size: 13px;
-    //     font-family: "Poppins Light";
-    // }
+    .label {
+        padding-left: 5px;
+        color: #3b3b3b;
+        font-size: 15px;
+    }
 
     span {
         color: var(--error);

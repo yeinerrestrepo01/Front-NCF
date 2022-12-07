@@ -1,0 +1,38 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 500px;
+    padding: 36px 50px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+
+    .logo {
+        width: 400px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        
+        .title {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .button {
+                height: 45px;
+            }
+        }
+    }
+}

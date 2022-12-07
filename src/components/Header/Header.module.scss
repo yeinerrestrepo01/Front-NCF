@@ -1,3 +1,11 @@
 .link {
     text-decoration: none;
+
+    .active {
+        color: #fff !important;
+
+        .nav-link {
+            color: #fff !important;
+        }
+    }
 }

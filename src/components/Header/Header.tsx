@@ -5,9 +5,7 @@ import styles from './Header.module.scss';
 const Header: React.FC = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-      <a className="navbar-brand" href="#">
-        ABInBev
-      </a>
+      <span className="navbar-brand">ABInBev</span>
       <button
         className="navbar-toggler"
         type="button"
@@ -22,8 +20,8 @@ const Header: React.FC = () => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <NavLink
-            className={({ isActive }) => `nav-item ${styles.link} ${isActive ? 'active' : ''}`}
-            to="/"
+            className={({ isActive }) => `nav-item ${styles.link} ${isActive ? styles.active : ''}`}
+            to="/home"
             end
           >
             <span className="nav-link">
@@ -31,7 +29,7 @@ const Header: React.FC = () => {
             </span>
           </NavLink>
           <NavLink
-            className={({ isActive }) => `nav-item ${styles.link} ${isActive ? 'active' : ''}`}
+            className={({ isActive }) => `nav-item ${styles.link} ${isActive ? styles.active : ''}`}
             to="partial"
             end
           >

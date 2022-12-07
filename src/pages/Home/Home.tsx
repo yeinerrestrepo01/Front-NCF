@@ -1,7 +1,7 @@
 import BackDrop from 'components/BackDrop/BackDrop';
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   DocumentCorrection,
   TableInvocecorrection,
@@ -12,11 +12,27 @@ import { CorrectionForm } from 'pages/Home/constants/Home.interface';
 
 const Home: React.FC = () => {
   const [invoice, setInvoice] = useState(null);
+  const [resetPages, setResetPages] = useState<boolean>(false);
   const [invoceCustomer, setInvoceCustomer] = useState(null);
   const [correctionInfo, setCorrectionInfo] = useState<IinvoiceSetting[]>([]);
 
   const { data, isLoading } = useInvoiceSetting(invoice, invoceCustomer);
   const { mutate, isLoading: loadingCorrection } = useCorrectInvoice();
+
+  useEffect(() => {
+    if (resetPages) {
+      setCorrectionInfo([]);
+      setInvoice(null);
+      setInvoceCustomer(null);
+      setTimeout(() => {
+        setResetPages(false);
+      }, 1000);
+    }
+
+    return () => {
+      setResetPages(false);
+    };
+  }, [resetPages]);
 
   //Funcion para consultat factuas
   const handleSearchInvoice = (search: CorrectionForm) => {
@@ -52,7 +68,7 @@ const Home: React.FC = () => {
           onSuccess: (res) => {
             if (res.estadoHttp === 200) {
               alert('Proceso realizado exitosamente.');
-              setCorrectionInfo([]);
+              setResetPages(true);
             } else {
               alert('No se pudo realizar la ejecucion del procso exitosamente');
             }
@@ -70,12 +86,12 @@ const Home: React.FC = () => {
 
   return (
     <div className="container mt-4">
-      <DocumentCorrection handleSearchInvoice={handleSearchInvoice} />
+      <DocumentCorrection handleSearchInvoice={handleSearchInvoice} resetForm={resetPages} />
       <div className="col-12 mt-3">
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          data={data}
+          data={invoice && invoceCustomer ? data : []}
           handleInfoCorrection={hanldeSetCorrection}
           loading={isLoading}
         />

@@ -6,13 +6,17 @@ import {
   InitialFormCorrection,
   validationsFormCorrection,
 } from 'pages/Home/constants/Home.constant';
-import { TextInput } from 'components';
+import { ResetForm, TextInput } from 'components';
 
 interface DocumentCorrectionProps {
   handleSearchInvoice: (f: CorrectionForm) => void;
+  resetForm?: boolean;
 }
 
-const DocumentCorrection: React.FC<DocumentCorrectionProps> = ({ handleSearchInvoice }) => {
+const DocumentCorrection: React.FC<DocumentCorrectionProps> = ({
+  handleSearchInvoice,
+  resetForm,
+}) => {
   return (
     <div>
       <h3>Correcion de Documento</h3>
@@ -38,6 +42,7 @@ const DocumentCorrection: React.FC<DocumentCorrectionProps> = ({ handleSearchInv
                 Consultar NCF
               </button>
             </div>
+            <ResetForm isReset={resetForm} />
           </Form>
         )}
       </Formik>
@@ -45,8 +50,13 @@ const DocumentCorrection: React.FC<DocumentCorrectionProps> = ({ handleSearchInv
   );
 };
 
+DocumentCorrection.defaultProps = {
+  resetForm: false,
+};
+
 DocumentCorrection.propTypes = {
   handleSearchInvoice: PropTypes.func.isRequired,
+  resetForm: PropTypes.bool,
 };
 
 export default DocumentCorrection;
