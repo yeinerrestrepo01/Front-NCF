@@ -1,11 +1,16 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Menu } from 'components/Header/elements';
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <nav className="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-      <span className="navbar-brand">ABInBev</span>
+      <span className={`${styles.pointer} navbar-brand`} onClick={() => navigate('/home')}>
+        ABInBev
+      </span>
       <button
         className="navbar-toggler"
         type="button"
@@ -17,28 +22,7 @@ const Header: React.FC = () => {
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav">
-          <NavLink
-            className={({ isActive }) => `nav-item ${styles.link} ${isActive ? styles.active : ''}`}
-            to="/home"
-            end
-          >
-            <span className="nav-link">
-              Corrección montos <span className="sr-only"></span>
-            </span>
-          </NavLink>
-          <NavLink
-            className={({ isActive }) => `nav-item ${styles.link} ${isActive ? styles.active : ''}`}
-            to="partial"
-            end
-          >
-            <span className="nav-link">
-              Anulación Parcial <span className="sr-only"></span>
-            </span>
-          </NavLink>
-        </ul>
-      </div>
+      <Menu />
     </nav>
   );
 };

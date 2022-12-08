@@ -14,7 +14,7 @@ const AppRoute: React.FC = () => {
         <Route element={<Authentication />} path="/*" />
         <Route element={<Homelayout />} path="/home/*" />
         <Route path="error" element={<ErrorPage />} />
-        <Route element={<Page404 />} path="404" />
+        <Route element={<Page404 />} path="/404" />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
     </Suspense>
