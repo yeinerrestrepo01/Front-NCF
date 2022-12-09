@@ -38,7 +38,7 @@ const FormPartialCancellation: React.FC<FormPartialCancellationProps> = ({
               <TextInput name="intercompany" label="NCF Intercompany" required />
             </div>
             <div className="form-group mt-4">
-              <TextInput name="tikect" label="Id de reclamacion" />
+              <TextInput name="tikect" label="Documento Descarga" required />
             </div>
             <div className="mt-3">
               <button className="btn btn-primary" type="submit">

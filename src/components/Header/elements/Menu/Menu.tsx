@@ -20,7 +20,7 @@ const Menu: React.FC = () => {
             to="partial"
             end
           >
-            Anulación Parcial
+            Corrección Cantidades
           </NavLink>
         </li>
         <li className="nav-item">
@@ -43,11 +43,6 @@ const Menu: React.FC = () => {
             Mantenimiento
           </a>
           <ul className="dropdown-menu dropdown-menu-dark">
-            <li>
-              <NavLink className="dropdown-item" to="/home/1" end>
-                Solicitud secuencia
-              </NavLink>
-            </li>
             <li>
               <NavLink className="dropdown-item" to="/home/1" end>
                 Configuración Tipo NCF
