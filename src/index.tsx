@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 });
 root.render(
   <>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <QueryClientProvider client={queryClient}>
         <App />
       </QueryClientProvider>
