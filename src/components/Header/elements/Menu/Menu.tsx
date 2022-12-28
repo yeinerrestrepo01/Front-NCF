@@ -44,17 +44,17 @@ const Menu: React.FC = () => {
           </a>
           <ul className="dropdown-menu dropdown-menu-dark">
             <li>
-              <NavLink className="dropdown-item" to="/home/1" end>
+              <NavLink className="dropdown-item" to="settings" end>
                 Configuración Tipo NCF
               </NavLink>
             </li>
             <li>
-              <NavLink className="dropdown-item" to="/home/1" end>
+              <NavLink className="dropdown-item" to="cancellation" end>
                 Anulación Documento
               </NavLink>
             </li>
             <li>
-              <NavLink className="dropdown-item" to="/home/1" end>
+              <NavLink className="dropdown-item" to="correction" end>
                 Correción Documento
               </NavLink>
             </li>
