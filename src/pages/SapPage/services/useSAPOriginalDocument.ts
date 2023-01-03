@@ -3,7 +3,7 @@ import { SAPOriginalDocumentData } from 'pages/SapPage/constants/Sap.interface';
 import { useQuery, UseQueryResult } from 'react-query';
 
 const getSapOriginalDocument = async () => {
-  const data = await axios.get<SAPOriginalDocumentData[]>('Sap/DocmentoOrigianl');
+  const data = await axios.get<SAPOriginalDocumentData[]>('Sap/DocmentoOriginal');
 
   return data?.data;
 };
