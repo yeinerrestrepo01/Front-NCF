@@ -70,7 +70,7 @@ const Home: React.FC = () => {
               alert('Proceso realizado exitosamente.');
               setResetPages(true);
             } else {
-              alert('No se pudo realizar la ejecucion del procso exitosamente');
+              alert('No se pudo realizar la ejecucion del proceso exitosamente');
             }
           },
         }

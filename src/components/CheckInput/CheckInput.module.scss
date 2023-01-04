@@ -1,0 +1,30 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .label {
+        padding-left: 5px;
+        color: #3b3b3b;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    span {
+        color: var(--error);
+        font-size: 12px;
+    }
+
+    .hasError {
+        border: 1px solid var(--error);
+    }
+
+    .error {
+        color: var(--error);
+    }
+
+    .input {
+        cursor: pointer;
+        margin-left: 15px;
+    }
+}
