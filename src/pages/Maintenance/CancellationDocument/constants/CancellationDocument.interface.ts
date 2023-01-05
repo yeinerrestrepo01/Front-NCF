@@ -3,7 +3,7 @@ export type CancellationFetch = {
   tipoOrigen: string;
   tipoCancelCliente: string;
   tipoCancelInterComp: string;
-  SAPCancelacion: string;
+  sapCancelacion: string;
   inicio: string;
   interComCliente: string;
   interComCompania: string;

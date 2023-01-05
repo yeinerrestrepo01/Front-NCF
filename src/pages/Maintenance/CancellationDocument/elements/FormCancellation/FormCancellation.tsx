@@ -34,7 +34,7 @@ const FormCancellation: React.FC<FormCancellationProps> = ({
               <TextInput name="tipoOrigen" label="Tipo Origen" required />
               <TextInput name="tipoCancelCliente" label="Tipo Cancelación Cliente" required />
               <TextInput name="tipoCancelInterComp" label="Tipo Cancelación InterCom" required />
-              <TextInput name="SAPCancelacion" label="SAP Cancelación" required />
+              <TextInput name="sapCancelacion" label="SAP Cancelación" required />
               <TextInput name="inicio" label="Inicio" required />
               <TextInput name="interComCliente" label="InterCom Cliente" required />
               <TextInput name="interComCompania" label="InterCom Compañia" required />
