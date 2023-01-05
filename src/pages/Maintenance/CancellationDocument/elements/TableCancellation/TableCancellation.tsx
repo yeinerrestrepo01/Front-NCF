@@ -5,12 +5,12 @@ import { Table } from 'components';
 import { TableColumn } from 'components/Table/elements';
 import { GridCellProps } from 'components/Table/constants/Table.interface';
 
-interface TableSettingsProps {
+interface TableCancellationProps {
   data?: unknown[] | SettingsNFCFeth[];
   handleEdit?: (p: SettingsNFCFeth | unknown) => void;
 }
 
-const TableSettings: React.FC<TableSettingsProps> = ({ data, handleEdit }) => {
+const TableCancellation: React.FC<TableCancellationProps> = ({ data, handleEdit }) => {
   const getCellEdit = ({ dataItem, field }: GridCellProps) => {
     if (field === 'edit') {
       return (
@@ -24,24 +24,25 @@ const TableSettings: React.FC<TableSettingsProps> = ({ data, handleEdit }) => {
 
   return (
     <Table data={data === undefined || data?.length <= 0 ? [] : data}>
-      <TableColumn field="cIdCompany" title="Empresa" />
-      <TableColumn field="cIDTypeDocument" title="Tipo de Documento" />
-      <TableColumn field="prefix" title="Prefijo" />
-      <TableColumn field="lenth" title="Tamaño" />
-      <TableColumn field="nNoAutorizacion" title="No. Autorización" />
+      <TableColumn field="compania" title="Empresa" />
+      <TableColumn field="tipoOrigen" title="Tipo Origen" />
+      <TableColumn field="tipoCancelCliente" title="Tipo Cancelación Cliente" />
+      <TableColumn field="tipoCancelInterComp" title="Tipo Cancelación InterCom" />
+      <TableColumn field="SAPCancelacion" title="SAP Cancelación" />
+      <TableColumn field="inicio" title="Inicio" />
       <TableColumn className="text-center" cell={getCellEdit} field="edit" title="Acciones" />
     </Table>
   );
 };
 
-TableSettings.defaultProps = {
+TableCancellation.defaultProps = {
   data: [],
   handleEdit: null,
 };
 
-TableSettings.propTypes = {
+TableCancellation.propTypes = {
   data: PropTypes.array,
   handleEdit: PropTypes.func,
 };
 
-export default TableSettings;
+export default TableCancellation;
