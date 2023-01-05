@@ -28,8 +28,8 @@ const TableDocumentCorrection: React.FC<TableDocumentCorrectionProps> = ({ data,
       <TableColumn field="tipoOrigen" title="Tipo Origen" />
       <TableColumn field="tipoCancelacion" title="Tipo Cancelación" />
       <TableColumn field="tipoCorreccion" title="Tipo Corrección" />
-      <TableColumn field="SAPCancelacion" title="SAP Cancelación" />
-      <TableColumn field="SAPCorreccion" title="SAP Correción" />
+      <TableColumn field="sapCancelacion" title="SAP Cancelación" />
+      <TableColumn field="sapCorreccion" title="SAP Correción" />
       <TableColumn className="text-center" cell={getCellEdit} field="edit" title="Acciones" />
     </Table>
   );

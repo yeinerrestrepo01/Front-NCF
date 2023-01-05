@@ -9,8 +9,8 @@ export const FormCorrectionInitial = (
     tipoOrigen: initialValues?.tipoOrigen || '',
     tipoCancelacion: initialValues?.tipoCancelacion || '',
     tipoCorreccion: initialValues?.tipoCorreccion || '',
-    SAPCancelacion: initialValues?.SAPCancelacion || '',
-    SAPCorreccion: initialValues?.SAPCorreccion || '',
+    sapCancelacion: initialValues?.sapCancelacion || '',
+    sapCorreccion: initialValues?.sapCorreccion || '',
   };
 };
 
@@ -19,6 +19,6 @@ export const ValidationCorrection = Yup.object({
   tipoOrigen: Yup.string().required('Campo Obligatorio'),
   tipoCancelacion: Yup.string().required('Campo Obligatorio'),
   tipoCorreccion: Yup.string().required('Campo Obligatorio'),
-  SAPCancelacion: Yup.string().required('Campo Obligatorio'),
-  SAPCorreccion: Yup.string().required('Campo Obligatorio'),
+  sapCancelacion: Yup.string().required('Campo Obligatorio'),
+  sapCorreccion: Yup.string().required('Campo Obligatorio'),
 });

@@ -28,7 +28,7 @@ const TableCancellation: React.FC<TableCancellationProps> = ({ data, handleEdit 
       <TableColumn field="tipoOrigen" title="Tipo Origen" />
       <TableColumn field="tipoCancelCliente" title="Tipo Cancelación Cliente" />
       <TableColumn field="tipoCancelInterComp" title="Tipo Cancelación InterCom" />
-      <TableColumn field="SAPCancelacion" title="SAP Cancelación" />
+      <TableColumn field="sapCancelacion" title="SAP Cancelación" />
       <TableColumn field="inicio" title="Inicio" />
       <TableColumn className="text-center" cell={getCellEdit} field="edit" title="Acciones" />
     </Table>

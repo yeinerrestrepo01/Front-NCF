@@ -34,8 +34,8 @@ const FormDocumentCorrection: React.FC<FormDocumentCorrectionProps> = ({
               <TextInput name="tipoOrigen" label="Tipo Origen" required />
               <TextInput name="tipoCancelacion" label="Tipo Cancelación" required />
               <TextInput name="tipoCorreccion" label="Tipo Corrección" required />
-              <TextInput name="SAPCancelacion" label="SAP Cancelación" required />
-              <TextInput name="SAPCorreccion" label="SAP Correción" required />
+              <TextInput name="sapCancelacion" label="SAP Cancelación" required />
+              <TextInput name="sapCorreccion" label="SAP Correción" required />
             </div>
 
             <ResetForm isReset={resetForm} />

@@ -3,6 +3,6 @@ export type DocumentCorrectionFetch = {
   tipoOrigen: string;
   tipoCancelacion: string;
   tipoCorreccion: string;
-  SAPCancelacion: string;
-  SAPCorreccion: string;
+  sapCancelacion: string;
+  sapCorreccion: string;
 };
