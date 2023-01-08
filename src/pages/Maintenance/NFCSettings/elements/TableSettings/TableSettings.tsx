@@ -25,7 +25,7 @@ const TableSettings: React.FC<TableSettingsProps> = ({ data, handleEdit }) => {
   return (
     <Table data={data === undefined || data?.length <= 0 ? [] : data}>
       <TableColumn field="cIdCompany" title="Empresa" />
-      <TableColumn field="cIDTypeDocument" title="Tipo de Documento" />
+      <TableColumn field="cidTypeDocument" title="Tipo de Documento" />
       <TableColumn field="prefix" title="Prefijo" />
       <TableColumn field="lenth" title="Tamaño" />
       <TableColumn field="nNoAutorizacion" title="No. Autorización" />

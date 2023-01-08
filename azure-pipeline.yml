@@ -1,0 +1,80 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+trigger:
+  branches:
+    include:
+      - master
+      - devsecops-enablement
+      - dev
+
+pr:
+  branches:
+    include:
+      - feature/*
+      - master
+      - dev
+
+pool:
+  vmImage: ubuntu-latest
+
+resources:
+  repositories:
+    - repository: appsectemplates
+      type: git
+      name: DevSecOps/DevSecOps
+      endpoint: CrossOrg-DevSecOps
+
+variables:
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/') }}:
+    branchName: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
+    branchName: $[ replace(variables['System.PullRequest.TargetBranch'], 'refs/heads/', '') ]
+
+stages:
+  - stage: Setup
+    jobs:
+      - job: Init
+        steps:
+          - checkout: self
+          - checkout: appsectemplates
+
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '14.x'
+            displayName: 'Install Node.js'
+          - script: npm install
+
+          - template: pipeline_templates/Security_tasks/prepareSonarCloud.yml@appsectemplates
+            parameters:
+              SCServiceConnection: 'SonarcloudServer'
+              SCProjectKey: 'MAZ_I654_Fenix_11_React' 
+              SCProjectName: 'MAZ_I654_Fenix_11_React'
+              SCBranchName: '$(Build.SourceBranchName)'
+              SCBaseDirPath: './$(Build.Repository.Name)'
+          
+          - template: pipeline_templates/secure_code_scan.yml@appsectemplates
+            parameters:
+              
+              scanSonarCloud: false
+              sonarCloudGate: false
+              SCServiceConnection: 'SonarcloudServer'
+
+              scanSnyk: true
+              SKFailOnIssues: false
+              SkServiceConnection: 'SnykServer'
+              SkOrganization: '9134a366-363d-4605-866c-42e698f2f7f1'
+              SkAdditionalArgs: '--all-projects --detection-depth=4 -d'
+              
+              scanGitleaks: true
+              ScanFolder: './$(Build.Repository.Name)'
+              Scanmode: 'nogit'
+              FailOnSecrets: true
+
+              scanCheckmarx: true
+              CxServiceConnection: "CheckmarxServer"
+              CxPreset: "ASA_SDLC_Ready"
+              CxEnableSyncScan: false
+              CxEnableThreshold: false
+              CxTeamName: "/CxServer/AB-InBev/MAZ/MAZ_DR_Projects"

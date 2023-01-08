@@ -9,7 +9,7 @@ export const FormSettingsInitial = (initialValues?: SettingsNFCFeth): SettingsNF
   return {
     activo: initialValues?.activo || 0,
     cIdCompany: initialValues?.cIdCompany || '',
-    cIDTypeDocument: initialValues?.cIDTypeDocument || '',
+    cIDTypeDocument: initialValues?.cidTypeDocument || '',
     fechaVencimiento: initialValues?.fechaVencimiento || undefined,
     lenth: initialValues?.lenth.toString() || '',
     nIncrementoTipo: initialValues?.nIncrementoTipo.toString() || '',
@@ -45,7 +45,7 @@ export const getDataSetingdSend = (formvalues: SettingsNFC): SettingsNFCFeth => 
   return {
     activo: formvalues.activo,
     cIdCompany: formvalues.cIdCompany,
-    cIDTypeDocument: formvalues.cIDTypeDocument,
+    cidTypeDocument: formvalues.cIDTypeDocument,
     fechaActualizaicon: formvalues.fechaActualizaicon,
     fechaVencimiento: formvalues.fechaVencimiento,
     lenth: Number(formvalues.lenth),

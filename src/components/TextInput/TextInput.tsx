@@ -32,6 +32,7 @@ const TextInput: React.FC<TextInputProps> = ({ label, name, placeholder, require
         type={type || 'text'}
         placeholder={placeholder}
         name={name}
+        autoComplete={'off'}
         {...field}
       />
     </div>

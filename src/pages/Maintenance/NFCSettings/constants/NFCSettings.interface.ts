@@ -17,7 +17,7 @@ export type SettingsNFC = {
 export type SettingsNFCFeth = {
   activo: number;
   cIdCompany: string;
-  cIDTypeDocument: string;
+  cidTypeDocument: string;
   fechaActualizaicon?: Date;
   fechaVencimiento: Date;
   lenth: number;
