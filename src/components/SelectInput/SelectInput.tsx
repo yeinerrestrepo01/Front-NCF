@@ -5,13 +5,14 @@ import { FormControOptionslSelect } from 'global/types';
 import styles from './SelectInput.module.scss';
 
 interface SelectInputProps {
+  disabled?: boolean;
   label?: string;
   name: string;
   options?: FormControOptionslSelect[];
   required?: boolean;
 }
 
-const SelectInput: React.FC<SelectInputProps> = ({ label, name, options, required }) => {
+const SelectInput: React.FC<SelectInputProps> = ({ disabled, label, name, options, required }) => {
   const [field, meta] = useField({
     name,
   });
@@ -27,6 +28,7 @@ const SelectInput: React.FC<SelectInputProps> = ({ label, name, options, require
         >{`${label} ${required ? ' *' : ''}`}</label>
       )}
       <select
+        disabled={disabled}
         className={`${styles.control} ${error ? styles.hasError : ''} form-select`}
         id={name}
         name={name}
@@ -44,12 +46,14 @@ const SelectInput: React.FC<SelectInputProps> = ({ label, name, options, require
 };
 
 SelectInput.defaultProps = {
+  disabled: false,
   label: null,
   options: [],
   required: false,
 };
 
 SelectInput.propTypes = {
+  disabled: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   options: PropTypes.array,

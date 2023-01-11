@@ -32,8 +32,19 @@ const FormSettings: React.FC<FormSettingsProps> = ({
         {() => (
           <Form className={styles.form}>
             <div className={styles.formContent}>
-              <SelectInput name="cIdCompany" label="Empresa" options={ListCompany} required />
-              <TextInput name="cIDTypeDocument" label="Tipo Documento" required />
+              <SelectInput
+                disabled={isUpdate}
+                name="cIdCompany"
+                label="Empresa"
+                options={ListCompany}
+                required
+              />
+              <TextInput
+                disabled={isUpdate}
+                name="cIDTypeDocument"
+                label="Tipo Documento"
+                required
+              />
               <TextInput name="prefix" label="Prefijo" required />
               <NumberInput name="lenth" label="Tamaño" required />
               <TextInput name="nNoAutorizacion" label="No. Autorización" required />

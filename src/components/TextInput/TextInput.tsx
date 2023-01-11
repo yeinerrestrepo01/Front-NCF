@@ -6,6 +6,7 @@ import styles from './TextInput.module.scss';
 type InputType = 'email' | 'text';
 
 interface TextInputProps {
+  disabled?: boolean;
   label?: string;
   name: string;
   placeholder?: string;
@@ -13,7 +14,14 @@ interface TextInputProps {
   type?: InputType;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ label, name, placeholder, required, type }) => {
+const TextInput: React.FC<TextInputProps> = ({
+  disabled,
+  label,
+  name,
+  placeholder,
+  required,
+  type,
+}) => {
   const [field, meta] = useField({
     name,
   });
@@ -29,6 +37,7 @@ const TextInput: React.FC<TextInputProps> = ({ label, name, placeholder, require
       )}
       <input
         className={` ${error ? styles.hasError : ''} form-control`}
+        disabled={disabled}
         type={type || 'text'}
         placeholder={placeholder}
         name={name}
@@ -40,12 +49,14 @@ const TextInput: React.FC<TextInputProps> = ({ label, name, placeholder, require
 };
 
 TextInput.defaultProps = {
+  disabled: false,
   label: null,
   placeholder: null,
   type: null,
 };
 
 TextInput.propTypes = {
+  disabled: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,

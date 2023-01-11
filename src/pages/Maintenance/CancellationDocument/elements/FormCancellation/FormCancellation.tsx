@@ -30,8 +30,14 @@ const FormCancellation: React.FC<FormCancellationProps> = ({
         {() => (
           <Form className={styles.form}>
             <div className={styles.formContent}>
-              <SelectInput name="compania" label="Empresa" options={ListCompany} required />
-              <TextInput name="tipoOrigen" label="Tipo Origen" required />
+              <SelectInput
+                disabled={isUpdate}
+                name="compania"
+                label="Empresa"
+                options={ListCompany}
+                required
+              />
+              <TextInput disabled={isUpdate} name="tipoOrigen" label="Tipo Origen" required />
               <TextInput name="tipoCancelCliente" label="Tipo Cancelación Cliente" required />
               <TextInput name="tipoCancelInterComp" label="Tipo Cancelación InterCom" required />
               <TextInput name="sapCancelacion" label="SAP Cancelación" required />
