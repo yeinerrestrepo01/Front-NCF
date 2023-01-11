@@ -1,13 +1,15 @@
-import { ResolveProvider } from 'context';
+import { AuthenticationProvider, ResolveProvider } from 'context';
 import React from 'react';
-import AppRoute from 'routers/AppRoute';
+import { AppRoute } from 'routers';
 import './App.scss';
 
 const App: React.FC = () => {
   return (
     <main>
       <ResolveProvider>
-        <AppRoute />
+        <AuthenticationProvider>
+          <AppRoute />
+        </AuthenticationProvider>
       </ResolveProvider>
     </main>
   );

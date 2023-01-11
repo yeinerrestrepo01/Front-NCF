@@ -1,17 +1,37 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { PasswordInput, TextInput } from 'components';
+import { BackDrop, PasswordInput, TextInput } from 'components';
+import { useAuthentication } from 'global/hooks';
 import { FormLoginInit } from 'pages/Authentication/constants/Authentication.constant';
 import { LoginInterface } from 'pages/Authentication/constants/Authentication.interface';
+import { useLogin } from 'pages/Authentication/services';
 import LogoNCFImg from 'assets/images/logo_ncf.jpeg';
 import styles from './Login.module.scss';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { mutate, isLoading } = useLogin();
+  const { login } = useAuthentication();
 
   const handleLogin = (loginForm: LoginInterface) => {
-    navigate('/home');
+    if (isLoading) return;
+    mutate(
+      {
+        password: loginForm.password,
+        usuario: loginForm.userName,
+      },
+      {
+        onSuccess: (resp) => {
+          if (resp.exitoso) {
+            login(resp.respuesta);
+            navigate('/home');
+          } else {
+            alert(resp.mensaje);
+          }
+        },
+      }
+    );
   };
 
   return (
@@ -34,6 +54,7 @@ const Login: React.FC = () => {
           )}
         </Formik>
       </div>
+      {isLoading && <BackDrop show />}
     </div>
   );
 };

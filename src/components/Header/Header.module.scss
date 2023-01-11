@@ -1,3 +1,19 @@
 .pointer {
     cursor: pointer;
 }
+
+.display_name {
+    color: #fff;
+    margin-right: 30px;
+}
+
+.logout {
+    color: rgba(255, 255, 255, 0.55);
+    background-color: transparent;
+    border: none;
+    margin-right: 10px;
+
+    &:hover {
+        color: #fff;
+    }
+}
