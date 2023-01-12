@@ -3898,10 +3898,10 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
-ef_ui_components@^1.2.0-beta.8:
-  version "1.2.0-beta.8"
-  resolved "https://registry.yarnpkg.com/ef_ui_components/-/ef_ui_components-1.2.0-beta.8.tgz#7d2b567d69d978964abd3002fb723afa67f25853"
-  integrity sha512-A6DYebMDls0WaWsKgrmxNonAkxwiZs0AHwMysruO7jnX5WNwLRnZ08CMM7J6yVdzKXXggYxP4AUEd6IcYfDTxg==
+ef_ui_components@^1.2.0-beta.9:
+  version "1.2.0-beta.9"
+  resolved "https://registry.yarnpkg.com/ef_ui_components/-/ef_ui_components-1.2.0-beta.9.tgz#1130c7c85e39f99cb6077a21ad7879c6cf8efcaa"
+  integrity sha512-dCxG613sCBlPoknWPAc8HQ8te0oLHziIRvqdzlkp3QxhZHPjdZj7pLPKa14iFJSFdaEWJOjU7R0pLs2xIREZCw==
 
 ejs@^3.1.6:
   version "3.1.8"

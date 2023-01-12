@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'components';
+import { GridCellProps, Table, TableColumn } from 'ef_ui_components';
 import { SAPOriginalDocumentData } from 'pages/SapPage/constants/Sap.interface';
-import { TableColumn } from 'components/Table/elements';
 import { Checksolid, NoChecksolid } from 'global/icons';
 import styles from './SAPOriginalDocument.module.scss';
-import { GridCellProps } from 'components/Table/types/Colmuns.interface';
 
 interface SAPOriginalDocumentProps {
   data?: SAPOriginalDocumentData[];

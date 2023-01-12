@@ -8,5 +8,4 @@ export { default as PasswordInput } from './PasswordInput/PasswordInput';
 export { default as ResetForm } from './ResetForm/ResetForm';
 export { default as SelectInput } from './SelectInput/SelectInput';
 export { default as Skeleton } from './Skeleton/Skeleton';
-export { default as Table } from './Table/Table';
 export { default as TextInput } from './TextInput/TextInput';

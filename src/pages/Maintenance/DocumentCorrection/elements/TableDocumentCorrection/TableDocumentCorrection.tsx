@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'components';
-import { TableColumn } from 'components/Table/elements';
+import { GridCellProps, Table, TableColumn } from 'ef_ui_components';
 import { DocumentCorrectionFetch } from 'pages/Maintenance/DocumentCorrection/constants/DocumentCorrection.interface';
-import { GridCellProps } from 'components/Table/types/Colmuns.interface';
 
 interface TableDocumentCorrectionProps {
   data?: unknown[] | DocumentCorrectionFetch[];

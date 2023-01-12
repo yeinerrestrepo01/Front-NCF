@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { GridCellProps, Table, TableColumn } from 'ef_ui_components';
 import { SettingsNFCFeth } from 'pages/Maintenance/NFCSettings/constants/NFCSettings.interface';
-import { Table } from 'components';
-import { TableColumn } from 'components/Table/elements';
-import { GridCellProps } from 'components/Table/types/Colmuns.interface';
 
 interface TableSettingsProps {
   data?: unknown[] | SettingsNFCFeth[];

@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'components';
-import { TableColumn } from 'components/Table/elements';
+import { GridCellProps, Table, TableColumn, TableItemChangeEvent } from 'ef_ui_components';
 import { getCalculateValueQTY, getFormattedDecimal } from 'global/helpers';
 import { MinusSvg } from 'global/icons';
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import styles from './TableInvocecorrectionCancellation.module.scss';
-import { GridCellProps } from 'components/Table/types/Colmuns.interface';
-import { TableItemChangeEvent } from 'components/Table/types/Event.interface';
 
 interface TableInvocecorrectionCancellationProps {
   data: IinvoiceSetting[];
