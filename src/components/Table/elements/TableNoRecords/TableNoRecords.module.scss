@@ -1,13 +1,23 @@
-.containerNoData {
-    position: relative;
+.table-noData {
+  border-color: transparent;
+  height: 100%;
+  width: 100%;
+
+  tbody, tr, td {
+    border-color: transparent !important;
+  }
+
+  .containerNoData {
     min-width: 100%;
     min-height: 100%;
-    > div {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(50%, -50%);
+    border-color: transparent;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: auto;
       height: auto;
     }
   }
+}

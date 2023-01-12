@@ -1,0 +1,83 @@
+.tableHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    color: #424242;
+    background-color: #fafafa;
+    border-color: rgba(0, 0, 0, 0.08);
+    border-bottom-width: 1px;
+    padding-inline-start: 0;
+    padding-inline-end: 19px;
+    border-width: 0;
+    border-style: solid;
+    border-color: inherit;
+    flex: 0 0 auto;
+
+    &-wrap {
+        box-sizing: content-box;
+        border-color: rgba(0, 0, 0, 0.08);
+        flex: 1 1 auto;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: -1px;
+        width: 100%;
+        border-width: 0 1px 0 0;
+        border-style: solid;
+        position: relative;
+        overflow: hidden;
+        color: #424242;
+        background-color: #fafafa;
+
+        table {
+            margin-bottom: -1px;
+            table-layout: fixed;
+            box-sizing: content-box;
+            margin: 0;
+            width: 100%;
+            max-width: none;
+            border-width: 0;
+            border-color: inherit;
+            border-collapse: separate;
+            border-spacing: 0;
+            empty-cells: show;
+            outline: 0;
+
+            colgroup {
+                display: table-column-group;
+            }
+
+            thead {
+                text-align: left;
+                border-color: inherit;
+                display: table-header-group;
+                vertical-align: middle;
+
+                tr {
+                    border-color: inherit;
+                    display: table-row;
+                    vertical-align: inherit;
+                    text-align: left;
+
+                    th {
+                        border-left-width: 0;
+                        position: relative;
+                        vertical-align: bottom;
+                        cursor: default;
+                        border-color: rgba(0, 0, 0, 0.08);
+                        padding: 8px 12px;
+                        border-width: 0 0 1px 1px;
+                        white-space: nowrap;
+                        border-style: solid;
+                        outline: 0;
+                        font-weight: inherit;
+                        text-align: inherit;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: table-cell;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}

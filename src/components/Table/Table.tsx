@@ -1,19 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { ColumnsProps, DataResult, TableProps } from 'components/Table/constants/Table.interface';
-import {
-  CellMoneyInput,
-  CellNumberInput,
-  CellTextInput,
-  TableBody,
-  TableHeader,
-  TableNoRecords,
-  TableSkeleton,
-} from 'components/Table/elements';
+import { DataResult, TableProps } from './types/Table.interface';
+import { Pager, TableBody, TableHeader, TableNoRecords, TableSkeleton } from './elements';
+import { RowOrder, TableSortChangeEvent } from './types/Sortable.interface';
+import { useOrderBy } from '../../global/hooks';
+import { ColumnsProps } from './types/Colmuns.interface';
+import useCellInputs from '../../global/hooks/useCellInputs';
 import styles from './Table.module.scss';
 
 /**
- * Represents the [Table component]({% slug overview_grid %}).
+ * Represents the Table Component.
  *
  * @example
  * ```jsx
@@ -43,7 +39,6 @@ import styles from './Table.module.scss';
  * ReactDOM.render(<App />, document.querySelector('my-app'));
  * ```
  */
-
 const Table: React.FC<TableProps> = ({
   children,
   className,
@@ -51,12 +46,46 @@ const Table: React.FC<TableProps> = ({
   editName,
   isSelectRow,
   loadingData,
-  onRowClick,
   onItemRowChangue,
+  onPageChange,
+  onSortChange,
+  onRowClick,
+  skip,
+  sortable,
+  style,
+  take,
   theadClassName,
+  total,
 }) => {
   const [listColTable, setListColTable] = useState<JSX.Element[]>([]);
+  const [loadingFilter, setLoadingFilter] = useState<boolean>(false);
+  const [listData, setListData] = useState<unknown[]>([]);
   const [columnsCount, setColumnsCount] = useState<number>(0);
+  const [dataFilter, setDataFilter] = useState<unknown[] | DataResult>([]);
+  const [skipTable, setSkipTable] = useState(skip);
+  const [rowOrder, setRowOrder] = useState<RowOrder>(null);
+  const [cellInput, getCellTable] = useCellInputs();
+  const [handleOrderBy] = useOrderBy();
+
+  useEffect(() => {
+    if (!!(data as DataResult)?.data) {
+      setListData([...(data as DataResult)?.data]);
+    } else {
+      setListData([...(data as unknown[])]);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (take) {
+      const contLimit = skipTable * take + take;
+
+      setDataFilter(
+        (listData as unknown[]).slice(skipTable * take, contLimit > total ? total : contLimit)
+      );
+    } else {
+      setDataFilter(listData);
+    }
+  }, [listData, skipTable, take, total]);
 
   useEffect(() => {
     setColumnsCount(React.Children.count(children));
@@ -66,67 +95,47 @@ const Table: React.FC<TableProps> = ({
     };
   }, [children]);
 
-  const cellInput = useCallback(
-    (dataField: unknown, col: ColumnsProps) => {
-      switch (col.typeInput) {
-        case 'number':
-          return <CellNumberInput column={col} data={dataField} onChange={onItemRowChangue} />;
-        case 'money':
-          return <CellMoneyInput column={col} data={dataField} onChange={onItemRowChangue} />;
-        case 'text':
-          return <CellTextInput column={col} data={dataField} onChange={onItemRowChangue} />;
-        default:
-          return null;
-      }
-    },
-    [onItemRowChangue]
-  );
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const getCellTable = useCallback((dataField: any, reg: ColumnsProps) => {
-    return (
-      <td className={reg.className} key={`td_${reg.field}`}>
-        {!!reg.cell ? <reg.cell dataItem={dataField} field={reg.field} /> : dataField[reg.field]}
-      </td>
-    );
-  }, []);
-
   const getCellEdit = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (dataField: any, reg: ColumnsProps) => {
       if (reg.typeInput) {
         return (
-          <td className={reg.className} key={`td_${reg.field}`}>
-            {cellInput(dataField, reg)}
+          <td
+            className={`${reg.className} ${styles['cell-input']}`}
+            key={`td_${reg.field}`}
+            role="gridcell"
+          >
+            {cellInput(dataField, reg, onItemRowChangue)}
           </td>
         );
       } else {
         return getCellTable(dataField, reg);
       }
     },
-    [cellInput, getCellTable]
+    [cellInput, getCellTable, onItemRowChangue]
   );
 
-  const getTdata = useCallback(
+  const getData = useCallback(
     (dataField: unknown) => {
       const columns: ColumnsProps[] = [];
       const listCol: JSX.Element[] = [];
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      React.Children.forEach(children, (ch: any) => {
-        if (ch.props.field) {
-          columns.push(ch.props);
-        }
-      });
-
-      columns.map((reg) => {
+      if (dataField) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if ((dataField as any)[editName]) {
-          listCol.push(getCellEdit(dataField, reg));
-        } else {
-          listCol.push(getCellTable(dataField, reg));
-        }
-      });
+        React.Children.forEach(children, (ch: any) => {
+          if (ch.props.field) {
+            columns.push(ch.props);
+          }
+        });
+
+        columns.map((reg) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          if ((dataField as any)[editName]) {
+            listCol.push(getCellEdit(dataField, reg));
+          } else {
+            listCol.push(getCellTable(dataField, reg));
+          }
+        });
+      }
       return listCol;
     },
     [children, editName, getCellEdit, getCellTable]
@@ -134,28 +143,23 @@ const Table: React.FC<TableProps> = ({
 
   const renderBody = useCallback(() => {
     const items: JSX.Element[] = [];
-    let valuesData = null;
-    if (!!(data as DataResult)?.data) {
-      valuesData = (data as DataResult).data;
-    } else {
-      valuesData = data;
-    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (valuesData as any[]).map((item, index) => {
+    (dataFilter as any[]).map((item, index) => {
       items.push(
         <tr
           className={`${styles['row-table']} ${
-            item.select && isSelectRow ? styles['select-row'] : ''
+            item?.select && isSelectRow ? styles['select-row'] : ''
           }`}
           onClick={() => !!onRowClick && onRowClick({ dataItem: item })}
+          role="row"
           key={`col_${index + 1}`}
         >
-          {getTdata(item)}
+          {getData(item)}
         </tr>
       );
     });
     setListColTable(items);
-  }, [data, getTdata, isSelectRow, onRowClick]);
+  }, [dataFilter, getData, isSelectRow, onRowClick]);
 
   useEffect(() => {
     if (!!data) {
@@ -167,40 +171,93 @@ const Table: React.FC<TableProps> = ({
     };
   }, [data, renderBody]);
 
+  const handlePage = (page: number) => {
+    if (typeof onPageChange === 'function') {
+      onPageChange({
+        page: {
+          skip: page,
+          take,
+        },
+      });
+    }
+    setSkipTable(page);
+  };
+
+  const handleRowOrder = (order: TableSortChangeEvent) => {
+    if (!!onSortChange && typeof onSortChange === 'function') {
+      onSortChange(order);
+    }
+    setListData([]);
+    setRowOrder(order.sort);
+    setLoadingFilter(true);
+    setTimeout(() => {
+      const list = handleOrderBy(
+        !!(data as DataResult)?.data ? [...(data as DataResult)?.data] : [...(data as unknown[])],
+        order.sort
+      );
+      setListData(list);
+      setLoadingFilter(false);
+    }, 500);
+  };
+
   return (
-    <>
-      <table className={`${styles.table} ${className}`}>
-        <TableHeader className={theadClassName}>{children}</TableHeader>
-        {loadingData && <TableSkeleton colNumber={columnsCount} />}
-        {listColTable.length > 0 && !loadingData ? (
+    <div className={`${styles['table-ui']} ${className || ''}`} style={style}>
+      <TableHeader
+        className={theadClassName}
+        handleRowOrder={handleRowOrder}
+        rowOrder={rowOrder}
+        sortable={sortable}
+      >
+        {children}
+      </TableHeader>
+      {(loadingData || loadingFilter) && <TableSkeleton colNumber={columnsCount} />}
+      {listColTable.length > 0 && !loadingData && !loadingFilter ? (
+        <>
           <TableBody data={listColTable} />
-        ) : (
-          !loadingData && <TableNoRecords colNumber={columnsCount} />
-        )}
-      </table>
-    </>
+          {take && (
+            <Pager handleSelectPage={handlePage} skip={skipTable} take={take} total={total} />
+          )}
+        </>
+      ) : (
+        !loadingData && !loadingFilter && <TableNoRecords colNumber={columnsCount} />
+      )}
+    </div>
   );
 };
 
 Table.defaultProps = {
   className: null,
   data: null,
+  editName: null,
   isSelectRow: false,
   loadingData: false,
   onItemRowChangue: null,
+  onPageChange: null,
+  onSortChange: null,
   onRowClick: null,
   theadClassName: null,
+  skip: null,
+  style: null,
+  take: null,
+  total: null,
 };
 
 Table.propTypes = {
   children: PropTypes.array.isRequired,
   className: PropTypes.string,
   data: PropTypes.any,
+  editName: PropTypes.any,
   isSelectRow: PropTypes.bool,
   loadingData: PropTypes.bool,
   onItemRowChangue: PropTypes.func,
+  onPageChange: PropTypes.func,
+  onSortChange: PropTypes.func,
   onRowClick: PropTypes.func,
   theadClassName: PropTypes.string,
+  skip: PropTypes.number,
+  style: PropTypes.any,
+  take: PropTypes.number,
+  total: PropTypes.number,
 };
 
 export default Table;

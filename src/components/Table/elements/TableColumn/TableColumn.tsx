@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ColumnsProps } from 'components/Table/constants/Table.interface';
+import { ColumnsProps } from '../../types/Colmuns.interface';
 
 type TableColumnProps = ColumnsProps;
 
@@ -11,7 +11,7 @@ type TableColumnProps = ColumnsProps;
 const TableColumn: React.FC<TableColumnProps> = ({ field, headerClassName, title, width }) => {
   return (
     <>
-      <th className={headerClassName} key={`th_${field}`} style={{ width: width }}>
+      <th className={headerClassName} key={`th_${field}`} style={{ width: width }} title={title}>
         {title}
       </th>
     </>

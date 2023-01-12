@@ -1,5 +1,4 @@
 import { Table } from 'components';
-import { GridCellProps, TableItemChangeEvent } from 'components/Table/constants/Table.interface';
 import TableColumn from 'components/Table/elements/TableColumn/TableColumn';
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
@@ -8,6 +7,9 @@ import PropTypes from 'prop-types';
 import { MinusSvg } from 'global/icons';
 import styles from './TableInvoceCorrection.module.scss';
 import { getFormattedDecimal } from 'global/helpers';
+import { GridCellProps } from 'components/Table/types/Colmuns.interface';
+import { TableItemChangeEvent } from 'components/Table/types/Event.interface';
+import { processTable } from 'components/Table/constants/Table.constant';
 
 interface TableInvoiceSCorrectionProps {
   data: IinvoiceSetting[];
@@ -76,35 +78,47 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
       {data.length > 0 ? (
         <>
           <Table
-            className="table table-bordered"
-            data={invoceCorrection.map((item) => ({
-              ...item,
-              isEdit: rowEdit === item.id,
-            }))}
+            className={'table_data'}
+            data={processTable(
+              invoceCorrection.map((item) => {
+                if (item.id === rowEdit) {
+                  item.isEdit = true;
+                } else {
+                  item.isEdit = false;
+                }
+                return item;
+              }) ?? [],
+              {}
+            )}
             editName="isEdit"
             onItemRowChangue={itemChange}
             onRowClick={(e) => setRowEdit(e.dataItem.id)}
           >
-            <TableColumn field="idProduct" title="Codigo Producto" />
-            <TableColumn className="text-center" field="amount" title="QTY" />
+            <TableColumn className={styles.number} field="idProduct" title="Codigo Producto" />
+            <TableColumn className={styles.center} field="amount" title="QTY" />
             <TableColumn
-              className="td-number"
+              className={styles.number}
               field="brutoTotal"
               title="Precio Bruto"
               typeInput="number"
             />
             <TableColumn
-              className="td-number"
+              className={styles.number}
               field="descuentoAmount"
               title="Descuento"
               typeInput="number"
             />
-            <TableColumn className="td-number" field="taxAmount" title="ITBIS" typeInput="number" />
-            <TableColumn className="td-number" field="isc" title="ISC" typeInput="number" />
-            <TableColumn className="td-number" field="isce" title="ISCE" typeInput="number" />
-            <TableColumn className="td-number" field="netAmount" title="Neto" />
             <TableColumn
-              className="td-number"
+              className={styles.number}
+              field="taxAmount"
+              title="ITBIS"
+              typeInput="number"
+            />
+            <TableColumn className={styles.number} field="isc" title="ISC" typeInput="number" />
+            <TableColumn className={styles.number} field="isce" title="ISCE" typeInput="number" />
+            <TableColumn className={styles.number} field="netAmount" title="Neto" />
+            <TableColumn
+              className={styles.number}
               field="interestValue"
               title="Interes Financiamiento"
               typeInput="money"

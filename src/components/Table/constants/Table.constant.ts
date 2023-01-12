@@ -1,4 +1,4 @@
-import { DataResult, State } from 'components/Table/constants/Table.interface';
+import { DataResult, State } from '../types/Table.interface';
 
 /**
  * Applies the specified operation descriptors to the data.
@@ -18,6 +18,7 @@ import { DataResult, State } from 'components/Table/constants/Table.interface';
  *
  * ```
  */
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function processTable<T>(data: T[], state: State): DataResult {
   return { data, total: null };

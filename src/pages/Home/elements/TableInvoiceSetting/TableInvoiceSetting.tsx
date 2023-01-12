@@ -1,11 +1,11 @@
 import { Table } from 'components';
-import { GridCellProps, TableRowClickEvent } from 'components/Table/constants/Table.interface';
 import { TableColumn } from 'components/Table/elements';
 import { Checksolid, NoChecksolid } from 'global/icons';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { processTable } from 'components/Table/constants/Table.constant';
+import { GridCellProps, TableRowClickEvent } from 'components/Table/types/Colmuns.interface';
 import styles from './TableInvoiceSetting.module.scss';
 
 interface TableInvoiceSettingProps {
@@ -41,7 +41,7 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
   return (
     <div className="container-fluid">
       <Table
-        className="table table-bordered"
+        className={'table_data'}
         data={processTable(
           data.map((item: IinvoiceSetting) => {
             if (correctionInfo.length > 0) {
@@ -57,19 +57,22 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
         loadingData={loading}
         onRowClick={handleClick}
         theadClassName="thead-dark"
+        take={10}
+        skip={0}
+        total={data.length}
       >
         <TableColumn field="idProduct" title="Codigo Producto" />
-        <TableColumn className="text-center" field="amount" title="QTY" />
-        <TableColumn className="td-number" field="brutoTotal" title="Precio Bruto" />
-        <TableColumn className="td-number" field="descuentoAmount" title="Descuento" />
-        <TableColumn className="td-number" field="taxAmount" title="ITBIS" />
-        <TableColumn className="td-number" field="isc" title="ISC" />
-        <TableColumn className="td-number" field="isce" title="ISCE" />
-        <TableColumn className="td-number" field="netAmount" title="Neto" />
-        <TableColumn className="td-number" field="interestValue" title="Interes Financiamiento" />
+        <TableColumn field="amount" title="QTY" />
+        <TableColumn field="brutoTotal" title="Precio Bruto" />
+        <TableColumn field="descuentoAmount" title="Descuento" />
+        <TableColumn field="taxAmount" title="ITBIS" />
+        <TableColumn field="isc" title="ISC" />
+        <TableColumn field="isce" title="ISCE" />
+        <TableColumn field="netAmount" title="Neto" />
+        <TableColumn field="interestValue" title="Interes Financiamiento" />
         <TableColumn
-          cell={getCellFreeGoods}
           className={styles.center}
+          cell={getCellFreeGoods}
           field="freeGoods"
           title="Free Goods"
         />

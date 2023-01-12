@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'components';
-import { GridCellProps, TableItemChangeEvent } from 'components/Table/constants/Table.interface';
 import { TableColumn } from 'components/Table/elements';
 import { getCalculateValueQTY, getFormattedDecimal } from 'global/helpers';
 import { MinusSvg } from 'global/icons';
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import styles from './TableInvocecorrectionCancellation.module.scss';
+import { GridCellProps } from 'components/Table/types/Colmuns.interface';
+import { TableItemChangeEvent } from 'components/Table/types/Event.interface';
 
 interface TableInvocecorrectionCancellationProps {
   data: IinvoiceSetting[];
@@ -99,7 +100,7 @@ const TableInvocecorrectionCancellation: React.FC<TableInvocecorrectionCancellat
       {data.length > 0 ? (
         <>
           <Table
-            className="table table-bordered"
+            className={'table_data'}
             data={invoceCorrection.map((item) => ({
               ...item,
               isEdit: rowEdit === item.id,
@@ -107,6 +108,9 @@ const TableInvocecorrectionCancellation: React.FC<TableInvocecorrectionCancellat
             editName="isEdit"
             onItemRowChangue={itemChange}
             onRowClick={(e) => setRowEdit(e.dataItem.id)}
+            take={10}
+            skip={0}
+            total={data.length}
           >
             <TableColumn field="idProduct" title="Codigo Producto" />
             <TableColumn className="td-number" field="amount" title="QTY" typeInput="number" />

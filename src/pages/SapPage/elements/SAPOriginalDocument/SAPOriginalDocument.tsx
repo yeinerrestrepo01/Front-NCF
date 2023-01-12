@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Table } from 'components';
 import { SAPOriginalDocumentData } from 'pages/SapPage/constants/Sap.interface';
 import { TableColumn } from 'components/Table/elements';
-import { GridCellProps } from 'components/Table/constants/Table.interface';
 import { Checksolid, NoChecksolid } from 'global/icons';
 import styles from './SAPOriginalDocument.module.scss';
+import { GridCellProps } from 'components/Table/types/Colmuns.interface';
 
 interface SAPOriginalDocumentProps {
   data?: SAPOriginalDocumentData[];
@@ -34,11 +34,14 @@ const SAPOriginalDocument: React.FC<SAPOriginalDocumentProps> = ({
   return (
     <div className="container-fluid">
       <Table
-        className="table table-bordered"
+        className={'table_data'}
         data={data}
         isSelectRow
         loadingData={loadingData}
         theadClassName="thead-dark"
+        take={10}
+        skip={0}
+        total={data.length}
       >
         <TableColumn field="idSupport" title="Codigo Soporte" />
         <TableColumn field="idOrder" title="No. Orden" />

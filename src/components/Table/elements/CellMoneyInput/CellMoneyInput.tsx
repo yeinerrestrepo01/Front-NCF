@@ -1,13 +1,9 @@
-import { ColumnsProps, TableItemChangeEvent } from 'components/Table/constants/Table.interface';
 import React, { ChangeEvent, useState } from 'react';
+import PropTypes from 'prop-types';
+import { InputProps } from '../../../../global/types/Inputs.interface';
 import styles from './CellMoneyInput.module.scss';
 
-interface CellMoneyInputProps {
-  column: ColumnsProps;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any;
-  onChange?: (e: TableItemChangeEvent) => void;
-}
+type CellMoneyInputProps = InputProps;
 
 const CellMoneyInput: React.FC<CellMoneyInputProps> = ({ column, data, onChange }) => {
   const [valInput, setValInput] = useState(data[column.field]);
@@ -28,7 +24,7 @@ const CellMoneyInput: React.FC<CellMoneyInputProps> = ({ column, data, onChange 
   return (
     <>
       <input
-        className={styles.input}
+        className={styles['cell-inputMoney']}
         type="number"
         name={column.field}
         onChange={hanleChangue}
@@ -36,6 +32,16 @@ const CellMoneyInput: React.FC<CellMoneyInputProps> = ({ column, data, onChange 
       />
     </>
   );
+};
+
+CellMoneyInput.defaultProps = {
+  onChange: null,
+};
+
+CellMoneyInput.propTypes = {
+  column: PropTypes.any.isRequired,
+  data: PropTypes.any.isRequired,
+  onChange: PropTypes.func,
 };
 
 export default CellMoneyInput;

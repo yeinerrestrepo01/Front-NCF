@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'components';
 import { TableColumn } from 'components/Table/elements';
-import { GridCellProps } from 'components/Table/constants/Table.interface';
 import { DocumentCorrectionFetch } from 'pages/Maintenance/DocumentCorrection/constants/DocumentCorrection.interface';
+import { GridCellProps } from 'components/Table/types/Colmuns.interface';
 
 interface TableDocumentCorrectionProps {
   data?: unknown[] | DocumentCorrectionFetch[];
@@ -23,7 +23,13 @@ const TableDocumentCorrection: React.FC<TableDocumentCorrectionProps> = ({ data,
   };
 
   return (
-    <Table data={data === undefined || data?.length <= 0 ? [] : data}>
+    <Table
+      className={'table_data'}
+      data={data === undefined || data?.length <= 0 ? [] : data}
+      take={10}
+      skip={0}
+      total={data.length}
+    >
       <TableColumn field="compania" title="Empresa" />
       <TableColumn field="tipoOrigen" title="Tipo Origen" />
       <TableColumn field="tipoCancelacion" title="Tipo Cancelación" />

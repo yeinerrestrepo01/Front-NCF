@@ -9,10 +9,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.thead-dark {
-  background: #212529;
-  color: white;
-}
 .iconos-check {
   width: 20px;
   height: 20px;
@@ -22,4 +18,19 @@ $error: #ff0000bb;
 
 :root {
   --error: #{$error};
+}
+
+.table_data {
+  thead {
+    background-color: black;
+    tr {
+      th {
+        color: white;
+      }
+    }
+  }
+}
+
+:global(.tableHeader), .tableHeader {
+  background-color: black;
 }

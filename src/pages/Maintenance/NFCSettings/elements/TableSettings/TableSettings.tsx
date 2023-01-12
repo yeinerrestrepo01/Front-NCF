@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { SettingsNFCFeth } from 'pages/Maintenance/NFCSettings/constants/NFCSettings.interface';
 import { Table } from 'components';
 import { TableColumn } from 'components/Table/elements';
-import { GridCellProps } from 'components/Table/constants/Table.interface';
+import { GridCellProps } from 'components/Table/types/Colmuns.interface';
 
 interface TableSettingsProps {
   data?: unknown[] | SettingsNFCFeth[];
@@ -23,7 +23,13 @@ const TableSettings: React.FC<TableSettingsProps> = ({ data, handleEdit }) => {
   };
 
   return (
-    <Table data={data === undefined || data?.length <= 0 ? [] : data}>
+    <Table
+      className={'table_data'}
+      data={data === undefined || data?.length <= 0 ? [] : data}
+      take={10}
+      skip={0}
+      total={data.length}
+    >
       <TableColumn field="cIdCompany" title="Empresa" />
       <TableColumn field="cidTypeDocument" title="Tipo de Documento" />
       <TableColumn field="prefix" title="Prefijo" />

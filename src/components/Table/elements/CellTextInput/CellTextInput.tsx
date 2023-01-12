@@ -1,14 +1,9 @@
 import React, { ChangeEvent, useState } from 'react';
 import PropTypes from 'prop-types';
-import { ColumnsProps, TableItemChangeEvent } from 'components/Table/constants/Table.interface';
+import { InputProps } from '../../../../global/types/Inputs.interface';
 import styles from './CellTextInput.module.scss';
 
-interface CellTextInputProps {
-  column: ColumnsProps;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any;
-  onChange?: (e: TableItemChangeEvent) => void;
-}
+type CellTextInputProps = InputProps;
 
 const CellTextInput: React.FC<CellTextInputProps> = ({ column, data, onChange }) => {
   const [valInput, setValInput] = useState(data[column.field]);
@@ -26,7 +21,7 @@ const CellTextInput: React.FC<CellTextInputProps> = ({ column, data, onChange })
   return (
     <>
       <input
-        className={styles.input}
+        className={styles['cell-input']}
         type="text"
         name={column.field}
         onChange={hanleChangue}
