@@ -1,11 +1,14 @@
-import { Table } from 'components';
-import { TableColumn } from 'components/Table/elements';
-import { Checksolid, NoChecksolid } from 'global/icons';
-import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { processTable } from 'components/Table/constants/Table.constant';
-import { GridCellProps, TableRowClickEvent } from 'components/Table/types/Colmuns.interface';
+import {
+  GridCellProps,
+  processTable,
+  Table,
+  TableColumn,
+  TableRowClickEvent,
+} from 'ef_ui_components';
+import { Checksolid, NoChecksolid } from 'global/icons';
+import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import styles from './TableInvoiceSetting.module.scss';
 
 interface TableInvoiceSettingProps {

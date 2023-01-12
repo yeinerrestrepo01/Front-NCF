@@ -9,6 +9,7 @@ import {
 } from 'pages/Home/elements';
 import { useCorrectInvoice, useInvoiceSetting } from 'pages/Home/services';
 import { CorrectionForm } from 'pages/Home/constants/Home.interface';
+import { dataPrueba } from './constants/Home.constant';
 
 const Home: React.FC = () => {
   const [invoice, setInvoice] = useState(null);
@@ -91,7 +92,8 @@ const Home: React.FC = () => {
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          data={invoice && invoceCustomer ? data : []}
+          // data={invoice && invoceCustomer ? data : []}
+          data={dataPrueba}
           handleInfoCorrection={hanldeSetCorrection}
           loading={isLoading}
         />

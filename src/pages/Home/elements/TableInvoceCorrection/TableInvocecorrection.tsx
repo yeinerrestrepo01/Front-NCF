@@ -1,15 +1,17 @@
-import { Table } from 'components';
-import TableColumn from 'components/Table/elements/TableColumn/TableColumn';
-import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
-import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import {
+  GridCellProps,
+  processTable,
+  Table,
+  TableColumn,
+  TableItemChangeEvent,
+} from 'ef_ui_components';
+import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
+import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import { MinusSvg } from 'global/icons';
-import styles from './TableInvoceCorrection.module.scss';
 import { getFormattedDecimal } from 'global/helpers';
-import { GridCellProps } from 'components/Table/types/Colmuns.interface';
-import { TableItemChangeEvent } from 'components/Table/types/Event.interface';
-import { processTable } from 'components/Table/constants/Table.constant';
+import styles from './TableInvoceCorrection.module.scss';
 
 interface TableInvoiceSCorrectionProps {
   data: IinvoiceSetting[];
