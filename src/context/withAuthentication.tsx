@@ -47,16 +47,16 @@ export const AuthenticationProvider: React.FC<AuthProviderProps> = ({ children }
 
   useLayoutEffect(() => {
     const authInterceptor = axios.interceptors.response.use(undefined, async (err: AxiosError) => {
-      const { status } = err?.response || {
-        status: 401,
-      };
+      const { status, config } = err?.response;
 
       switch (status) {
         case 401:
           logout();
           return err?.response || err;
         default:
-          alert('Se ha presentado un error en el sistema, por favor vuelva a realizar la acción');
+          if (!config.url.includes('Autenticacion')) {
+            alert('Se ha presentado un error en el sistema, por favor vuelva a realizar la acción');
+          }
           return err?.response || err;
       }
     });

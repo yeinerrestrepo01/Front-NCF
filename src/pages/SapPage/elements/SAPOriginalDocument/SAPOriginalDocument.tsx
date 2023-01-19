@@ -4,15 +4,18 @@ import { GridCellProps, Table, TableColumn } from 'ef_ui_components';
 import { SAPOriginalDocumentData } from 'pages/SapPage/constants/Sap.interface';
 import { Checksolid, NoChecksolid } from 'global/icons';
 import styles from './SAPOriginalDocument.module.scss';
+import { Button } from 'components';
 
 interface SAPOriginalDocumentProps {
   data?: SAPOriginalDocumentData[];
+  handleForwarding: (v: number) => void;
   isCorrection?: boolean;
   loadingData?: boolean;
 }
 
 const SAPOriginalDocument: React.FC<SAPOriginalDocumentProps> = ({
   data,
+  handleForwarding,
   isCorrection,
   loadingData,
 }) => {
@@ -27,6 +30,32 @@ const SAPOriginalDocument: React.FC<SAPOriginalDocumentProps> = ({
       return resp;
     }
     return null;
+  };
+
+  const getSapForwarding = ({ dataItem, field }: GridCellProps) => {
+    if (field === 'sapForwarding' && !(dataItem as SAPOriginalDocumentData).enviadoSap) {
+      return (
+        <Button
+          title="Reenviar"
+          className={styles.button}
+          onClick={() => handleForwarding((dataItem as SAPOriginalDocumentData).idSupport)}
+          typeView="primary"
+        />
+      );
+    }
+
+    if (field === 'resendCancellation' && !(dataItem as SAPOriginalDocumentData).enviadoSap) {
+      return (
+        <Button
+          title="Reenviar"
+          className={styles.button}
+          onClick={() => handleForwarding((dataItem as SAPOriginalDocumentData).idSupport)}
+          typeView="warning"
+        />
+      );
+    }
+
+    return <div />;
   };
 
   return (
@@ -58,6 +87,12 @@ const SAPOriginalDocument: React.FC<SAPOriginalDocumentProps> = ({
           title="Enviado a SAP"
         />
         <TableColumn field="respuestaSap" title="Respuesta SAP" />
+        <TableColumn
+          cell={getSapForwarding}
+          className="text-center"
+          field={isCorrection ? 'resendCancellation' : 'sapForwarding'}
+          title={isCorrection ? 'Reenviar Anulación' : 'Reenviar a SAP'}
+        />
       </Table>
     </div>
   );
@@ -71,6 +106,7 @@ SAPOriginalDocument.defaultProps = {
 
 SAPOriginalDocument.propTypes = {
   data: PropTypes.array,
+  handleForwarding: PropTypes.func.isRequired,
   isCorrection: PropTypes.bool,
   loadingData: PropTypes.bool,
 };
