@@ -31,6 +31,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ label, name, placeholder 
         name={name}
         placeholder={placeholder}
         type={open ? 'text' : 'password'}
+        autoComplete={'off'}
         {...field}
       />
     </div>

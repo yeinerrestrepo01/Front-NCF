@@ -57,7 +57,7 @@ stages:
           - template: pipeline_templates/secure_code_scan.yml@appsectemplates
             parameters:
               
-              scanSonarCloud: false
+              scanSonarCloud: true
               sonarCloudGate: false
               SCServiceConnection: 'SonarcloudServer'
 
