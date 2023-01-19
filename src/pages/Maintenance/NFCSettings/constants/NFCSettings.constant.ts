@@ -28,17 +28,17 @@ export const ListCompany: FormControOptionslSelect[] = [
 ];
 
 export const ValidationSettings = Yup.object({
-  cIdCompany: Yup.string().required('Campo Obligatorio'),
-  cIDTypeDocument: Yup.string().required('Campo Obligatorio'),
-  fechaVencimiento: Yup.date().required('Campo Obligatorio'),
-  lenth: Yup.number().required('Campo Obligatorio'),
-  nIncrementoTipo: Yup.number().required('Campo Obligatorio'),
-  nInicialAhora: Yup.number().required('Campo Obligatorio'),
-  nInicioAsignadoDGII: Yup.number().required('Campo Obligatorio'),
-  nLimiteAsignadoDGII: Yup.number().required('Campo Obligatorio'),
-  nNoAutorizacion: Yup.string().required('Campo Obligatorio'),
-  nNoAvgDiario: Yup.number().required('Campo Obligatorio'),
-  prefix: Yup.string().required('Campo Obligatorio'),
+  cIdCompany: Yup.string().required('Campo Obligatorio.'),
+  cIDTypeDocument: Yup.string().required('Campo Obligatorio.'),
+  fechaVencimiento: Yup.date().required('Campo Obligatorio.'),
+  lenth: Yup.number().required('Campo Obligatorio.'),
+  nIncrementoTipo: Yup.number().required('Campo Obligatorio.'),
+  nInicialAhora: Yup.number().required('Campo Obligatorio.'),
+  nInicioAsignadoDGII: Yup.number().required('Campo Obligatorio.'),
+  nLimiteAsignadoDGII: Yup.number().required('Campo Obligatorio.'),
+  nNoAutorizacion: Yup.string().required('Campo Obligatorio.'),
+  nNoAvgDiario: Yup.number().required('Campo Obligatorio.'),
+  prefix: Yup.string().required('Campo Obligatorio.'),
 });
 
 export const getDataSetingdSend = (formvalues: SettingsNFC): SettingsNFCFeth => {

@@ -1,0 +1,56 @@
+$border_table: rgba(0, 0, 0, 0.05);
+
+.table {
+    border: 1px solid $border_table;
+    margin: 0;
+    width: 100%;
+    max-width: none;
+    border-width: 0;
+    border-color: inherit;
+    border-collapse: separate;
+    border-spacing: 0;
+    empty-cells: show;
+    outline: 0;
+    font-size: 14px;
+
+    thead {
+        border: 1px solid $border_table;
+        color: #ffffff;
+        background-color: #333333;
+
+        th {
+            padding: 8px 12px;
+            border-width: 0 0 1px 1px;
+            border: 1px solid $border_table;
+        }
+    }
+
+    tbody {
+        tr {
+            &:nth-child(odd) {
+                background: #ffffff;
+            }
+            &:nth-child(even) {
+                background: rgba(0, 0, 0, 0.04);
+            }
+            td {
+                border: 1px solid $border_table;
+                padding: 8px;
+            }
+        }
+
+        .row-table {
+            cursor: pointer;
+
+            &:hover {
+                td {
+                    background-color: $border_table;
+                }
+            }
+        }
+
+        .select-row {
+            background-color: #A0A0A0 !important;
+        }
+    }
+}
