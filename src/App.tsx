@@ -1,4 +1,4 @@
-import { AuthenticationProvider, ResolveProvider } from 'context';
+import { AuthenticationProvider, ModalProvider, ResolveProvider } from 'context';
 import React from 'react';
 import { AppRoute } from 'routers';
 import './App.scss';
@@ -8,7 +8,9 @@ const App: React.FC = () => {
     <main>
       <ResolveProvider>
         <AuthenticationProvider>
-          <AppRoute />
+          <ModalProvider>
+            <AppRoute />
+          </ModalProvider>
         </AuthenticationProvider>
       </ResolveProvider>
     </main>

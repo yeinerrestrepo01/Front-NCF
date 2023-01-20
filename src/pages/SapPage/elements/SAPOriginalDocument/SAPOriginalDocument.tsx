@@ -8,6 +8,7 @@ import { Button } from 'components';
 
 interface SAPOriginalDocumentProps {
   data?: SAPOriginalDocumentData[];
+  handleDetailError?: (e: string) => void;
   handleForwarding: (v: number) => void;
   isCorrection?: boolean;
   loadingData?: boolean;
@@ -15,6 +16,7 @@ interface SAPOriginalDocumentProps {
 
 const SAPOriginalDocument: React.FC<SAPOriginalDocumentProps> = ({
   data,
+  handleDetailError,
   handleForwarding,
   isCorrection,
   loadingData,
@@ -50,6 +52,24 @@ const SAPOriginalDocument: React.FC<SAPOriginalDocumentProps> = ({
           title="Reenviar"
           className={styles.button}
           onClick={() => handleForwarding((dataItem as SAPOriginalDocumentData).idSupport)}
+          typeView="primary"
+        />
+      );
+    }
+
+    if (
+      field === 'respuestaSap' &&
+      (dataItem as SAPOriginalDocumentData).respuestaSap?.length > 0
+    ) {
+      return (
+        <Button
+          title="Ver Detalle"
+          className={styles.button}
+          onClick={() =>
+            typeof handleDetailError === 'function'
+              ? handleDetailError((dataItem as SAPOriginalDocumentData).respuestaSap)
+              : null
+          }
           typeView="warning"
         />
       );
@@ -86,7 +106,12 @@ const SAPOriginalDocument: React.FC<SAPOriginalDocumentProps> = ({
           field="enviadoSap"
           title="Enviado a SAP"
         />
-        <TableColumn field="respuestaSap" title="Respuesta SAP" />
+        <TableColumn
+          cell={getSapForwarding}
+          className="text-center"
+          field="respuestaSap"
+          title="Respuesta SAP"
+        />
         <TableColumn
           cell={getSapForwarding}
           className="text-center"
@@ -100,12 +125,14 @@ const SAPOriginalDocument: React.FC<SAPOriginalDocumentProps> = ({
 
 SAPOriginalDocument.defaultProps = {
   data: [],
+  handleDetailError: null,
   isCorrection: false,
   loadingData: false,
 };
 
 SAPOriginalDocument.propTypes = {
   data: PropTypes.array,
+  handleDetailError: PropTypes.func,
   handleForwarding: PropTypes.func.isRequired,
   isCorrection: PropTypes.bool,
   loadingData: PropTypes.bool,

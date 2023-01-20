@@ -1,0 +1,18 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding: 0px 12px;
+
+    .checks {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+
+        input, label {
+            cursor: pointer;
+        }
+    }
+}

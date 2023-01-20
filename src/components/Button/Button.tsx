@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps> = ({ className, onClick, title, type, typeVi
   return (
     <button
       className={`btn btn-${typeView} ${className}`}
-      onClick={onClick}
+      onClick={typeof onClick === 'function' ? onClick : null}
       type={type}
       title={title}
     >
