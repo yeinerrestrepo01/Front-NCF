@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 24px 36px;
+
+    .infoSap {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+
+        .title {
+            font-size: 30px;
+            margin: 0px;
+            border-bottom: 1px solid black;
+        }
+    }
+}

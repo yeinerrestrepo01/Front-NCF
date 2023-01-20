@@ -12,3 +12,8 @@ export interface SAPOriginalDocumentData {
 export interface SapDocumentCorrectionData extends SAPOriginalDocumentData {
   ncfCorreccion?: string;
 }
+
+export enum FilterSapEnum {
+  Successful,
+  Mistakes,
+}
