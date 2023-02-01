@@ -12,8 +12,10 @@ import {
   useDocumentCorrection,
   useUpdateCancellation,
 } from 'pages/Maintenance/DocumentCorrection/services';
+import { useModalAlert } from 'global/hooks';
 
 const DocumentCorrection: React.FC = () => {
+  const { openModalAlert } = useModalAlert();
   const [resetForm, setResetForm] = useState<boolean>(false);
   const [loadingEdit, setLoadingEdit] = useState<boolean>(false);
   const [valuesEdit, setValuesEdit] = useState<DocumentCorrectionFetch>(null);
@@ -50,15 +52,15 @@ const DocumentCorrection: React.FC = () => {
     mutate(formValues, {
       onSuccess: (res) => {
         if (res.estadoHttp === 200) {
-          alert('Proceso realizado exitosamente.');
+          openModalAlert('Proceso realizado exitosamente.');
           setResetForm(true);
           refetch();
         } else {
-          alert('No se pudo realizar la ejecucion del proceso exitosamente');
+          openModalAlert('No se pudo realizar la ejecucion del proceso exitosamente');
         }
       },
       onError: () => {
-        alert('No se pudo realizar la ejecucion del proceso exitosamente');
+        openModalAlert('No se pudo realizar la ejecucion del proceso exitosamente');
       },
     });
   };
@@ -67,18 +69,18 @@ const DocumentCorrection: React.FC = () => {
     updateCancellation(formValues, {
       onSuccess: (res) => {
         if (res.estadoHttp === 200) {
-          alert('Proceso realizado exitosamente.');
+          openModalAlert('Proceso realizado exitosamente.');
           setResetForm(true);
           setIsEdit(false);
           setValuesEdit(null);
           setLoadingEdit(true);
           refetch();
         } else {
-          alert('No se pudo realizar la ejecucion del proceso exitosamente');
+          openModalAlert('No se pudo realizar la ejecucion del proceso exitosamente');
         }
       },
       onError: () => {
-        alert('No se pudo realizar la ejecucion del proceso exitosamente');
+        openModalAlert('No se pudo realizar la ejecucion del proceso exitosamente');
       },
     });
   };

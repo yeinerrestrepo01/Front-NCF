@@ -10,8 +10,10 @@ import {
 } from 'pages/PartialCancellation/elements';
 import { PartialCancellationForm } from 'pages/PartialCancellation/constants/PartialCancellation.interface';
 import { useAnulacionInvoice } from 'pages/PartialCancellation/service';
+import { useModalAlert } from 'global/hooks';
 
 const PartialCancellation: React.FC = () => {
+  const { openModalAlert } = useModalAlert();
   const [resetPages, setResetPages] = useState<boolean>(false);
   const [searchInvoice, setSearchInvoice] = useState<PartialCancellationForm>(null);
   const [correctionInfo, setCorrectionInfo] = useState<IinvoiceSetting[]>([]);
@@ -67,10 +69,10 @@ const PartialCancellation: React.FC = () => {
         {
           onSuccess: (res) => {
             if (res.estadoHttp === 200) {
-              alert('Proceso realizado exitosamente.');
+              openModalAlert('Proceso realizado exitosamente.');
               setResetPages(true);
             } else {
-              alert('No se pudo realizar la ejecucion del procso exitosamente');
+              openModalAlert('No se pudo realizar la ejecucion del procso exitosamente');
             }
           },
         }

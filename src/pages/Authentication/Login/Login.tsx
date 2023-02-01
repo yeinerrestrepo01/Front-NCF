@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { BackDrop, PasswordInput, TextInput } from 'components';
-import { useAuthentication } from 'global/hooks';
+import { useAuthentication, useModalAlert } from 'global/hooks';
 import { FormLoginInit } from 'pages/Authentication/constants/Authentication.constant';
 import { LoginInterface } from 'pages/Authentication/constants/Authentication.interface';
 import { useLogin } from 'pages/Authentication/services';
@@ -11,6 +11,7 @@ import styles from './Login.module.scss';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { openModalAlert } = useModalAlert();
   const { mutate, isLoading } = useLogin();
   const { login } = useAuthentication();
 
@@ -27,7 +28,7 @@ const Login: React.FC = () => {
             login(resp.respuesta);
             navigate('/home');
           } else {
-            alert(resp.mensaje);
+            openModalAlert(resp.mensaje);
           }
         },
       }

@@ -1,4 +1,5 @@
 import { BackDrop } from 'components';
+import { useModalAlert } from 'global/hooks';
 import { IInvoiceDocument, IinvoiceSetting } from 'global/types';
 import { CorrectionForm } from 'pages/Home/constants/Home.interface';
 import {
@@ -10,6 +11,7 @@ import { useCorrectInvoice, useInvoiceSetting } from 'pages/Home/services';
 import React, { useEffect, useState } from 'react';
 
 const DGIICorrection: React.FC = () => {
+  const { openModalAlert } = useModalAlert();
   const [invoice, setInvoice] = useState(null);
   const [resetPages, setResetPages] = useState<boolean>(false);
   const [invoceCustomer, setInvoceCustomer] = useState(null);
@@ -66,10 +68,10 @@ const DGIICorrection: React.FC = () => {
         {
           onSuccess: (res) => {
             if (res.estadoHttp === 200) {
-              alert('Proceso realizado exitosamente.');
+              openModalAlert('Proceso realizado exitosamente.');
               setResetPages(true);
             } else {
-              alert('No se pudo realizar la ejecucion del proceso exitosamente');
+              openModalAlert('No se pudo realizar la ejecucion del proceso exitosamente');
             }
           },
         }
