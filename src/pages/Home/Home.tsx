@@ -10,7 +10,6 @@ import {
 } from 'pages/Home/elements';
 import { useCorrectInvoice, useInvoiceSetting } from 'pages/Home/services';
 import { CorrectionForm } from 'pages/Home/constants/Home.interface';
-import { dataPrueba } from 'pages/Home/constants/Home.constant';
 
 const Home: React.FC = () => {
   const { openModalAlert } = useModalAlert();
@@ -98,8 +97,7 @@ const Home: React.FC = () => {
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          // data={invoice && invoceCustomer ? data : []}
-          data={dataPrueba}
+          data={invoice && invoceCustomer ? data : []}
           handleInfoCorrection={hanldeSetCorrection}
           loading={isLoading}
         />

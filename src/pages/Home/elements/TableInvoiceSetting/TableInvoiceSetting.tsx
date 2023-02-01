@@ -136,7 +136,6 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
           cell={getCellFreeGoods}
           field="freeGoods"
           title="Free Goods"
-          width={120}
         />
       </Table>
     </div>
