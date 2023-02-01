@@ -1,17 +1,15 @@
-import BackDrop from 'components/BackDrop/BackDrop';
-import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
-import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
-import React, { useEffect, useState } from 'react';
+import { BackDrop } from 'components';
+import { IInvoiceDocument, IinvoiceSetting } from 'global/types';
+import { CorrectionForm } from 'pages/Home/constants/Home.interface';
 import {
   DocumentCorrection,
   TableInvocecorrection,
   TableInvoiceSetting,
 } from 'pages/Home/elements';
 import { useCorrectInvoice, useInvoiceSetting } from 'pages/Home/services';
-import { CorrectionForm } from 'pages/Home/constants/Home.interface';
-import { dataPrueba } from './constants/Home.constant';
+import React, { useEffect, useState } from 'react';
 
-const Home: React.FC = () => {
+const DGIICorrection: React.FC = () => {
   const [invoice, setInvoice] = useState(null);
   const [resetPages, setResetPages] = useState<boolean>(false);
   const [invoceCustomer, setInvoceCustomer] = useState(null);
@@ -90,14 +88,13 @@ const Home: React.FC = () => {
       <DocumentCorrection
         handleSearchInvoice={handleSearchInvoice}
         resetForm={resetPages}
-        title="Correcion de Documento"
+        title="Corrección DGII"
       />
       <div className="col-12 mt-3">
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          // data={invoice && invoceCustomer ? data : []}
-          data={dataPrueba}
+          data={invoice && invoceCustomer ? data : []}
           handleInfoCorrection={hanldeSetCorrection}
           loading={isLoading}
         />
@@ -122,4 +119,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default DGIICorrection;

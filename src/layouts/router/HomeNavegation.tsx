@@ -3,6 +3,7 @@ import React, { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 const Home = lazy(() => import('pages/Home/Home'));
+const DGIICorrection = lazy(() => import('pages/DGIICorrection/DGIICorrection'));
 const PartialCancellation = lazy(() => import('pages/PartialCancellation/PartialCancellation'));
 const SAP = lazy(() => import('pages/SapPage/SapPage'));
 const NFCSettings = lazy(() => import('pages/Maintenance/NFCSettings/NFCSettings'));
@@ -18,6 +19,7 @@ const HomeNavegation: React.FC = () => {
     <Suspense fallback={<BackDrop show />}>
       <Routes>
         <Route element={<Home />} path="/" />
+        <Route element={<DGIICorrection />} path="dgii" />
         <Route element={<PartialCancellation />} path="partial" />
         <Route element={<SAP />} path="sap" />
         <Route element={<NFCSettings />} path="settings" />

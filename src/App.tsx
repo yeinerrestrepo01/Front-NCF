@@ -1,4 +1,9 @@
-import { AuthenticationProvider, ModalProvider, ResolveProvider } from 'context';
+import {
+  AuthenticationProvider,
+  ModalAlertProvider,
+  ModalProvider,
+  ResolveProvider,
+} from 'context';
 import React from 'react';
 import { AppRoute } from 'routers';
 import './App.scss';
@@ -6,13 +11,15 @@ import './App.scss';
 const App: React.FC = () => {
   return (
     <main>
-      <ResolveProvider>
-        <AuthenticationProvider>
-          <ModalProvider>
-            <AppRoute />
-          </ModalProvider>
-        </AuthenticationProvider>
-      </ResolveProvider>
+      <ModalAlertProvider>
+        <ResolveProvider>
+          <AuthenticationProvider>
+            <ModalProvider>
+              <AppRoute />
+            </ModalProvider>
+          </AuthenticationProvider>
+        </ResolveProvider>
+      </ModalAlertProvider>
     </main>
   );
 };

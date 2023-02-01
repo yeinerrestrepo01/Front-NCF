@@ -17,6 +17,16 @@ const Menu: React.FC = () => {
         <li className="nav-item">
           <NavLink
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            id="dgii"
+            to="dgii"
+            end
+          >
+            Corrección DGII
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             to="partial"
             end
           >

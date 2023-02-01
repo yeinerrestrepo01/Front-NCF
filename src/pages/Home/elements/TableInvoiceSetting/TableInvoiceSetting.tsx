@@ -8,6 +8,7 @@ import {
   TableRowClickEvent,
 } from 'ef_ui_components';
 import { Checksolid, NoChecksolid } from 'global/icons';
+import { getCurrencyFormat } from 'global/helpers';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import styles from './TableInvoiceSetting.module.scss';
 
@@ -41,6 +42,10 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
     handleInfoCorrection(e.dataItem);
   };
 
+  const handleDecimal = ({ dataItem, field }: GridCellProps) => {
+    return <span>{getCurrencyFormat(dataItem[field] ? Number(dataItem[field]) : 0)}</span>;
+  };
+
   return (
     <div className="container-fluid">
       <Table
@@ -64,20 +69,74 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
         skip={0}
         total={data.length}
       >
-        <TableColumn field="idProduct" title="Codigo Producto" />
-        <TableColumn field="amount" title="QTY" />
-        <TableColumn field="brutoTotal" title="Precio Bruto" />
-        <TableColumn field="descuentoAmount" title="Descuento" />
-        <TableColumn field="taxAmount" title="ITBIS" />
-        <TableColumn field="isc" title="ISC" />
-        <TableColumn field="isce" title="ISCE" />
-        <TableColumn field="netAmount" title="Neto" />
-        <TableColumn field="interestValue" title="Interes Financiamiento" />
+        <TableColumn
+          className={styles.right}
+          field="idProduct"
+          title="Codigo Producto"
+          width={240}
+        />
+        <TableColumn
+          cell={handleDecimal}
+          className={styles.center}
+          field="amount"
+          title="QTY"
+          width={60}
+        />
+        <TableColumn
+          cell={handleDecimal}
+          className={styles.right}
+          field="brutoTotal"
+          title="Precio Bruto"
+          width={160}
+        />
+        <TableColumn
+          cell={handleDecimal}
+          className={styles.right}
+          field="descuentoAmount"
+          title="Descuento"
+          width={160}
+        />
+        <TableColumn
+          cell={handleDecimal}
+          className={styles.right}
+          field="taxAmount"
+          title="ITBIS"
+          width={120}
+        />
+        <TableColumn
+          cell={handleDecimal}
+          className={styles.right}
+          field="isc"
+          title="ISC"
+          width={120}
+        />
+        <TableColumn
+          cell={handleDecimal}
+          className={styles.right}
+          field="isce"
+          title="ISCE"
+          width={120}
+        />
+        <TableColumn
+          cell={handleDecimal}
+          className={styles.right}
+          field="netAmount"
+          title="Neto"
+          width={120}
+        />
+        <TableColumn
+          cell={handleDecimal}
+          className={styles.right}
+          field="interestValue"
+          title="Interes Financiamiento"
+          width={200}
+        />
         <TableColumn
           className={styles.center}
           cell={getCellFreeGoods}
           field="freeGoods"
           title="Free Goods"
+          width={120}
         />
       </Table>
     </div>

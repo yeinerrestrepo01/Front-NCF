@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import { useLocalStorage } from 'global/hooks';
+import { useLocalStorage, useModalAlert } from 'global/hooks';
 import { Authentication, UserData } from 'global/types/Resolve.interface';
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useQueryClient } from 'react-query';
@@ -17,6 +17,7 @@ export const AuthenticationContext = React.createContext<Authentication>({
 export const AuthenticationProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<UserData>(null);
   const [loginUser, setLoginUser] = useLocalStorage<UserData>('nfc_user', null);
+  const { openModalAlert } = useModalAlert();
   const cache = useQueryClient();
 
   useEffect(() => {
@@ -47,6 +48,11 @@ export const AuthenticationProvider: React.FC<AuthProviderProps> = ({ children }
 
   useLayoutEffect(() => {
     const authInterceptor = axios.interceptors.response.use(undefined, async (err: AxiosError) => {
+      if (err?.code === 'ERR_NETWORK') {
+        openModalAlert('Algo está mal, intente más tarde.');
+        return err;
+      }
+
       const { status, config } = err?.response;
 
       switch (status) {
@@ -55,7 +61,9 @@ export const AuthenticationProvider: React.FC<AuthProviderProps> = ({ children }
           return err?.response || err;
         default:
           if (!config.url.includes('Autenticacion')) {
-            alert('Se ha presentado un error en el sistema, por favor vuelva a realizar la acción');
+            openModalAlert(
+              'Se ha presentado un error en el sistema, por favor vuelva a realizar la acción'
+            );
           }
           return err?.response || err;
       }

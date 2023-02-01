@@ -10,7 +10,7 @@ import {
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import { MinusSvg } from 'global/icons';
-import { getFormattedDecimal } from 'global/helpers';
+import { getCurrencyFormat, getFormattedDecimal } from 'global/helpers';
 import styles from './TableInvoceCorrection.module.scss';
 
 interface TableInvoiceSCorrectionProps {
@@ -26,6 +26,10 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
 }) => {
   const [invoceCorrection, setInvoceCorrection] = useState<IinvoiceSetting[]>([]);
   const [rowEdit, setRowEdit] = useState(null);
+
+  const handleDecimal = ({ dataItem, field }: GridCellProps) => {
+    return <span>{getCurrencyFormat(dataItem[field] ? Number(dataItem[field]) : 0)}</span>;
+  };
 
   useEffect(() => {
     if (data.length !== invoceCorrection.length) {
@@ -96,36 +100,80 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
             onItemRowChangue={itemChange}
             onRowClick={(e) => setRowEdit(e.dataItem.id)}
           >
-            <TableColumn className={styles.number} field="idProduct" title="Codigo Producto" />
-            <TableColumn className={styles.center} field="amount" title="QTY" />
             <TableColumn
+              className={styles.number}
+              field="idProduct"
+              title="Codigo Producto"
+              width={240}
+            />
+            <TableColumn
+              cell={handleDecimal}
+              className={styles.center}
+              field="amount"
+              title="QTY"
+              width={60}
+            />
+            <TableColumn
+              cell={handleDecimal}
               className={styles.number}
               field="brutoTotal"
               title="Precio Bruto"
               typeInput="number"
+              width={160}
             />
             <TableColumn
+              cell={handleDecimal}
               className={styles.number}
               field="descuentoAmount"
               title="Descuento"
               typeInput="number"
+              width={160}
             />
             <TableColumn
+              cell={handleDecimal}
               className={styles.number}
               field="taxAmount"
               title="ITBIS"
               typeInput="number"
+              width={120}
             />
-            <TableColumn className={styles.number} field="isc" title="ISC" typeInput="number" />
-            <TableColumn className={styles.number} field="isce" title="ISCE" typeInput="number" />
-            <TableColumn className={styles.number} field="netAmount" title="Neto" />
             <TableColumn
+              cell={handleDecimal}
+              className={styles.number}
+              field="isc"
+              title="ISC"
+              typeInput="number"
+              width={120}
+            />
+            <TableColumn
+              cell={handleDecimal}
+              className={styles.number}
+              field="isce"
+              title="ISCE"
+              typeInput="number"
+              width={120}
+            />
+            <TableColumn
+              cell={handleDecimal}
+              className={styles.number}
+              field="netAmount"
+              title="Neto"
+              width={120}
+            />
+            <TableColumn
+              cell={handleDecimal}
               className={styles.number}
               field="interestValue"
               title="Interes Financiamiento"
               typeInput="money"
+              width={200}
             />
-            <TableColumn className={styles.center} field="delete" cell={getCellDelete} />
+            <TableColumn
+              className={styles.center}
+              field="delete"
+              cell={getCellDelete}
+              width={120}
+            />
           </Table>
           <div className="mt-3 mb-3">
             <button
