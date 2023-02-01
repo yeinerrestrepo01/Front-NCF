@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from 'react';
 import { BackDrop } from 'components';
-import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
-import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
-import { TableInvoiceSetting } from 'pages/Home/elements';
-import { useInvoiceSetting } from 'pages/Home/services';
-import {
-  FormPartialCancellation,
-  TableInvocecorrectionCancellation,
-} from 'pages/PartialCancellation/elements';
-import { PartialCancellationForm } from 'pages/PartialCancellation/constants/PartialCancellation.interface';
-import { useAnulacionInvoice } from 'pages/PartialCancellation/service';
 import { useModalAlert } from 'global/hooks';
+import { IInvoiceDocument, IinvoiceSetting } from 'global/types';
+import { CorrectionForm } from 'pages/Home/constants/Home.interface';
+import {
+  DocumentCorrection,
+  TableInvocecorrection,
+  TableInvoiceSetting,
+} from 'pages/Home/elements';
+import { useCorrectInvoice, useInvoiceSetting } from 'pages/Home/services';
+import React, { useEffect, useState } from 'react';
 
-const PartialCancellation: React.FC = () => {
+const DGIICorrection: React.FC = () => {
   const { openModalAlert } = useModalAlert();
+  const [invoice, setInvoice] = useState(null);
   const [resetPages, setResetPages] = useState<boolean>(false);
-  const [searchInvoice, setSearchInvoice] = useState<PartialCancellationForm>(null);
+  const [invoceCustomer, setInvoceCustomer] = useState(null);
   const [correctionInfo, setCorrectionInfo] = useState<IinvoiceSetting[]>([]);
 
-  const { data, isLoading } = useInvoiceSetting(
-    searchInvoice?.nfcOrigen,
-    searchInvoice?.codigoCliente
-  );
-  const { mutate, isLoading: loadingCorrection } = useAnulacionInvoice();
+  const { data, isLoading } = useInvoiceSetting(invoice, invoceCustomer);
+  const { mutate, isLoading: loadingCorrection } = useCorrectInvoice();
 
   useEffect(() => {
     if (resetPages) {
       setCorrectionInfo([]);
-      setSearchInvoice(null);
+      setInvoice(null);
+      setInvoceCustomer(null);
       setTimeout(() => {
         setResetPages(false);
       }, 1000);
@@ -39,15 +36,17 @@ const PartialCancellation: React.FC = () => {
   }, [resetPages]);
 
   //Funcion para consultat factuas
-  const handleSearchInvoice = (search: PartialCancellationForm) => {
+  const handleSearchInvoice = (search: CorrectionForm) => {
     if (search.nfcOrigen.length > 0 && search.codigoCliente.length > 0) {
-      setSearchInvoice(search);
+      setInvoice(search.nfcOrigen);
+      setInvoceCustomer(search.codigoCliente);
     }
   };
 
   const hanldeSetCorrection = (invoiceSetting: IinvoiceSetting) => {
     if (
       invoiceSetting != null &&
+      invoiceSetting.freeGoods === 0 &&
       (!correctionInfo.find((inf) => inf.id === invoiceSetting.id) || correctionInfo.length === 0)
     ) {
       setCorrectionInfo([...correctionInfo, { ...invoiceSetting }]);
@@ -55,15 +54,15 @@ const PartialCancellation: React.FC = () => {
   };
 
   const handlenSendCorrection = (documentoCorrecion: IInvoiceDocument[]) => {
-    if (searchInvoice.nfcOrigen?.length > 0 && searchInvoice.codigoCliente?.length > 0) {
+    if (invoice?.length > 0 && invoceCustomer?.length > 0) {
       mutate(
         {
+          documentoOriginal: correctionInfo,
           documentoCorrecion: documentoCorrecion,
-          solicitudAnulacionDto: {
-            idCustumer: searchInvoice.codigoCliente,
-            ncf: searchInvoice.nfcOrigen,
-            idSupport: searchInvoice.tikect,
-            interCompany: searchInvoice.intercompany,
+          solitudSoporteDocumento: {
+            idCustumer: invoceCustomer,
+            ncf: invoice,
+            idSupport: '',
           },
         },
         {
@@ -72,7 +71,7 @@ const PartialCancellation: React.FC = () => {
               openModalAlert('Proceso realizado exitosamente.');
               setResetPages(true);
             } else {
-              openModalAlert('No se pudo realizar la ejecucion del procso exitosamente');
+              openModalAlert('No se pudo realizar la ejecucion del proceso exitosamente');
             }
           },
         }
@@ -85,14 +84,19 @@ const PartialCancellation: React.FC = () => {
       setCorrectionInfo(correctionInfo.filter((x) => x.id !== item.id));
     }
   };
+
   return (
     <div className="container mt-4">
-      <FormPartialCancellation handleSearchInvoice={handleSearchInvoice} resetForm={resetPages} />
+      <DocumentCorrection
+        handleSearchInvoice={handleSearchInvoice}
+        resetForm={resetPages}
+        title="Corrección DGII"
+      />
       <div className="col-12 mt-3">
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          data={searchInvoice ? data : []}
+          data={invoice && invoceCustomer ? data : []}
           handleInfoCorrection={hanldeSetCorrection}
           loading={isLoading}
         />
@@ -103,7 +107,7 @@ const PartialCancellation: React.FC = () => {
         <div className="col-12 mt-4">
           <h2 className="text-danger">Documento Correcion</h2>
           <hr></hr>
-          <TableInvocecorrectionCancellation
+          <TableInvocecorrection
             data={correctionInfo}
             handleDelteItemCorrection={handleDelteItemCorrection}
             HandlenSendCorrection={handlenSendCorrection}
@@ -117,4 +121,4 @@ const PartialCancellation: React.FC = () => {
   );
 };
 
-export default PartialCancellation;
+export default DGIICorrection;

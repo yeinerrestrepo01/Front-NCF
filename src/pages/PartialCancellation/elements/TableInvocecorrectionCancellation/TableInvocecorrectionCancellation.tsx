@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { GridCellProps, Table, TableColumn, TableItemChangeEvent } from 'ef_ui_components';
-import { getCalculateValueQTY, getFormattedDecimal } from 'global/helpers';
+import { getCalculateValueQTY, getCurrencyFormat, getFormattedDecimal } from 'global/helpers';
 import { MinusSvg } from 'global/icons';
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
@@ -92,6 +92,10 @@ const TableInvocecorrectionCancellation: React.FC<TableInvocecorrectionCancellat
     }
   };
 
+  const handleDecimal = ({ dataItem, field }: GridCellProps) => {
+    return <span>{getCurrencyFormat(dataItem[field] ? Number(dataItem[field]) : 0)}</span>;
+  };
+
   return (
     <div className="container-fluid mt-3">
       {data.length > 0 ? (
@@ -110,19 +114,69 @@ const TableInvocecorrectionCancellation: React.FC<TableInvocecorrectionCancellat
             total={data.length}
           >
             <TableColumn field="idProduct" title="Codigo Producto" />
-            <TableColumn className="td-number" field="amount" title="QTY" typeInput="number" />
-            <TableColumn className="td-number" field="brutoTotal" title="Precio Bruto" />
-            <TableColumn className="td-number" field="descuentoAmount" title="Descuento" />
-            <TableColumn className="td-number" field="taxAmount" title="ITBIS" />
-            <TableColumn className="td-number" field="isc" title="ISC" />
-            <TableColumn className="td-number" field="isce" title="ISCE" />
-            <TableColumn className="td-number" field="netAmount" title="Neto" />
             <TableColumn
-              className="td-number"
+              cell={handleDecimal}
+              className={styles.number}
+              field="amount"
+              title="QTY"
+              typeInput="number"
+              width={240}
+            />
+            <TableColumn
+              cell={handleDecimal}
+              className={styles.number}
+              field="brutoTotal"
+              title="Precio Bruto"
+              width={60}
+            />
+            <TableColumn
+              cell={handleDecimal}
+              className={styles.number}
+              field="descuentoAmount"
+              title="Descuento"
+              width={160}
+            />
+            <TableColumn
+              cell={handleDecimal}
+              className={styles.number}
+              field="taxAmount"
+              title="ITBIS"
+              width={160}
+            />
+            <TableColumn
+              cell={handleDecimal}
+              className={styles.number}
+              width={120}
+              field="isc"
+              title="ISC"
+            />
+            <TableColumn
+              cell={handleDecimal}
+              className={styles.number}
+              width={120}
+              field="isce"
+              title="ISCE"
+            />
+            <TableColumn
+              cell={handleDecimal}
+              className={styles.number}
+              width={120}
+              field="netAmount"
+              title="Neto"
+            />
+            <TableColumn
+              cell={handleDecimal}
+              className={styles.number}
+              width={120}
               field="interestValue"
               title="Interes Financiamiento"
             />
-            <TableColumn className={styles.center} field="delete" cell={getCellDelete} />
+            <TableColumn
+              className={styles.center}
+              width={120}
+              field="delete"
+              cell={getCellDelete}
+            />
           </Table>
           <div className="mt-3 mb-3">
             <button

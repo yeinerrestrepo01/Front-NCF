@@ -11,15 +11,17 @@ import { ResetForm, TextInput } from 'components';
 interface DocumentCorrectionProps {
   handleSearchInvoice: (f: CorrectionForm) => void;
   resetForm?: boolean;
+  title: string;
 }
 
 const DocumentCorrection: React.FC<DocumentCorrectionProps> = ({
   handleSearchInvoice,
   resetForm,
+  title,
 }) => {
   return (
     <div>
-      <h3>Correcion de Documento</h3>
+      <h3>{title}</h3>
       <hr />
       <Formik
         initialValues={InitialFormCorrection}
@@ -57,6 +59,7 @@ DocumentCorrection.defaultProps = {
 DocumentCorrection.propTypes = {
   handleSearchInvoice: PropTypes.func.isRequired,
   resetForm: PropTypes.bool,
+  title: PropTypes.string.isRequired,
 };
 
 export default DocumentCorrection;

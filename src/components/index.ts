@@ -4,6 +4,7 @@ export { default as CheckInput } from './CheckInput/CheckInput';
 export { default as DateInput } from './DateInput/DateInput';
 export { default as Header } from './Header/Header';
 export { default as Modal } from './Modal/Modal';
+export { default as ModalAlert } from './ModalAlert/ModalAlert';
 export { default as NoDta } from './NoData/NoData';
 export { default as NumberInput } from './NumberInput/NumberInput';
 export { default as PasswordInput } from './PasswordInput/PasswordInput';

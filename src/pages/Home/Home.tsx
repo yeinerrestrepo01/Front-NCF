@@ -2,6 +2,7 @@ import BackDrop from 'components/BackDrop/BackDrop';
 import { IInvoiceDocument } from 'global/types/IDocumectCorrection';
 import { IinvoiceSetting } from 'global/types/IinvoiceSetting';
 import React, { useEffect, useState } from 'react';
+import { useModalAlert } from 'global/hooks';
 import {
   DocumentCorrection,
   TableInvocecorrection,
@@ -9,8 +10,10 @@ import {
 } from 'pages/Home/elements';
 import { useCorrectInvoice, useInvoiceSetting } from 'pages/Home/services';
 import { CorrectionForm } from 'pages/Home/constants/Home.interface';
+import { dataPrueba } from 'pages/Home/constants/Home.constant';
 
 const Home: React.FC = () => {
+  const { openModalAlert } = useModalAlert();
   const [invoice, setInvoice] = useState(null);
   const [resetPages, setResetPages] = useState<boolean>(false);
   const [invoceCustomer, setInvoceCustomer] = useState(null);
@@ -67,10 +70,10 @@ const Home: React.FC = () => {
         {
           onSuccess: (res) => {
             if (res.estadoHttp === 200) {
-              alert('Proceso realizado exitosamente.');
+              openModalAlert('Proceso realizado exitosamente.');
               setResetPages(true);
             } else {
-              alert('No se pudo realizar la ejecucion del proceso exitosamente');
+              openModalAlert('No se pudo realizar la ejecucion del proceso exitosamente');
             }
           },
         }
@@ -86,12 +89,17 @@ const Home: React.FC = () => {
 
   return (
     <div className="container mt-4">
-      <DocumentCorrection handleSearchInvoice={handleSearchInvoice} resetForm={resetPages} />
+      <DocumentCorrection
+        handleSearchInvoice={handleSearchInvoice}
+        resetForm={resetPages}
+        title="Correcion de Documento"
+      />
       <div className="col-12 mt-3">
         <h2>Documento Original</h2>
         <TableInvoiceSetting
           correctionInfo={correctionInfo}
-          data={invoice && invoceCustomer ? data : []}
+          // data={invoice && invoceCustomer ? data : []}
+          data={dataPrueba}
           handleInfoCorrection={hanldeSetCorrection}
           loading={isLoading}
         />
