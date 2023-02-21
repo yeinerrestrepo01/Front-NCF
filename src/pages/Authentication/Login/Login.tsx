@@ -7,6 +7,7 @@ import { FormLoginInit } from 'pages/Authentication/constants/Authentication.con
 import { LoginInterface } from 'pages/Authentication/constants/Authentication.interface';
 import { useLogin } from 'pages/Authentication/services';
 import LogoNCFImg from 'assets/images/logo_ncf.jpeg';
+import { getMainMenu } from 'global/helpers';
 import styles from './Login.module.scss';
 
 const Login: React.FC = () => {
@@ -26,7 +27,9 @@ const Login: React.FC = () => {
         onSuccess: (resp) => {
           if (resp.exitoso) {
             login(resp.respuesta);
-            navigate('/home');
+            const menuInitial = getMainMenu(resp.respuesta.perfiles[0].nombre);
+
+            navigate(menuInitial.id === 1 ? menuInitial.url : `/home/${menuInitial.url}`);
           } else {
             openModalAlert(resp.mensaje);
           }
