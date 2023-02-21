@@ -1,3 +1,5 @@
+import { Profiles } from 'global/types';
+
 export type Global = {
   APIUrl: string;
 };
@@ -14,4 +16,5 @@ export type UserData = {
   emailAddress: string;
   name: string;
   displayName: string;
+  perfiles: Profiles[];
 };
