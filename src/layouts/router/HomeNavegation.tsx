@@ -13,6 +13,7 @@ const CancellationDocument = lazy(
 const DocumentCorrection = lazy(
   () => import('pages/Maintenance/DocumentCorrection/DocumentCorrection')
 );
+const Reports = lazy(() => import('pages/ReportsPage/ReportsPage'));
 
 const HomeNavegation: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const HomeNavegation: React.FC = () => {
         <Route element={<NFCSettings />} path="settings" />
         <Route element={<CancellationDocument />} path="cancellation" />
         <Route element={<DocumentCorrection />} path="correction" />
+        <Route element={<Reports />} path="reports" />
         <Route path="*" element={<Navigate to={'/404'} replace />} />
       </Routes>
     </Suspense>
