@@ -69,7 +69,7 @@ const PartialCancellation: React.FC = () => {
         {
           onSuccess: (res) => {
             if (res.estadoHttp === 200) {
-              openModalAlert('Proceso realizado exitosamente.');
+              openModalAlert(res.mensaje);
               setResetPages(true);
             } else {
               openModalAlert('No se pudo realizar la ejecucion del procso exitosamente');

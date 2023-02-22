@@ -116,7 +116,7 @@ const TableInvocecorrectionCancellation: React.FC<TableInvocecorrectionCancellat
             <TableColumn field="idProduct" title="Codigo Producto" />
             <TableColumn
               cell={handleDecimal}
-              className={styles.number}
+              className={styles.center}
               field="amount"
               title="QTY"
               typeInput="number"
@@ -127,7 +127,7 @@ const TableInvocecorrectionCancellation: React.FC<TableInvocecorrectionCancellat
               className={styles.number}
               field="brutoTotal"
               title="Precio Bruto"
-              width={60}
+              width={160}
             />
             <TableColumn
               cell={handleDecimal}

@@ -31,7 +31,7 @@ const DocumentCorrection: React.FC<DocumentCorrectionProps> = ({
         {() => (
           <Form>
             <div className="form-group mt-4">
-              <TextInput name="nfcOrigen" label="NCF Origen" required />
+              <TextInput name="nfcOrigen" label="NCF Origen" required maxLength={15} />
             </div>
             <div className="form-group mt-4">
               <TextInput name="codigoCliente" label="Codigo Cliente" required />

@@ -27,9 +27,10 @@ const Login: React.FC = () => {
         onSuccess: (resp) => {
           if (resp.exitoso) {
             login(resp.respuesta);
-            const menuInitial = getMainMenu(resp.respuesta.perfiles[0].nombre);
-
-            navigate(menuInitial.id === 1 ? menuInitial.url : `/home/${menuInitial.url}`);
+            if (resp.respuesta?.perfiles.length >= 0) {
+              const menuInitial = getMainMenu(resp.respuesta.perfiles[0].nombre);
+              navigate(menuInitial.id === 1 ? menuInitial.url : `/home/${menuInitial.url}`);
+            }
           } else {
             openModalAlert(resp.mensaje);
           }

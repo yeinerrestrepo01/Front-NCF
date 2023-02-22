@@ -29,13 +29,13 @@ const FormPartialCancellation: React.FC<FormPartialCancellationProps> = ({
         {() => (
           <Form>
             <div className="form-group mt-4">
-              <TextInput name="nfcOrigen" label="NCF Origen" required />
+              <TextInput name="nfcOrigen" label="NCF Origen" required maxLength={15} />
             </div>
             <div className="form-group mt-4">
               <TextInput name="codigoCliente" label="Codigo Cliente" required />
             </div>
             <div className="form-group mt-4">
-              <TextInput name="intercompany" label="NCF Intercompany" required />
+              <TextInput name="intercompany" label="NCF Intercompany" required maxLength={15} />
             </div>
             <div className="form-group mt-4">
               <TextInput name="tikect" label="Documento Descarga" required />

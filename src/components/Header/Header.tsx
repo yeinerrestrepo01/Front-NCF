@@ -12,7 +12,9 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      setUrlMenu(getMainMenu(user.perfiles[0].nombre));
+      if (user?.perfiles.length >= 0) {
+        setUrlMenu(getMainMenu(user.perfiles[0]?.nombre));
+      }
     }
 
     return () => {

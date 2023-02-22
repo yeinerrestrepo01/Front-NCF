@@ -101,7 +101,7 @@ const TableInvocecorrection: React.FC<TableInvoiceSCorrectionProps> = ({
             onRowClick={(e) => setRowEdit(e.dataItem.id)}
           >
             <TableColumn
-              className={styles.number}
+              className={styles.lef}
               field="idProduct"
               title="Codigo Producto"
               width={240}

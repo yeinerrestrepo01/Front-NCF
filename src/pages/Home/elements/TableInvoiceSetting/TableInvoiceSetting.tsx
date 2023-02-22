@@ -70,7 +70,7 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
         total={data.length}
       >
         <TableColumn
-          className={styles.right}
+          className={styles.left}
           field="idProduct"
           title="Codigo Producto"
           width={240}
@@ -136,6 +136,7 @@ const TableInvoiceSetting: React.FC<TableInvoiceSettingProps> = ({
           cell={getCellFreeGoods}
           field="freeGoods"
           title="Free Goods"
+          width={120}
         />
       </Table>
     </div>

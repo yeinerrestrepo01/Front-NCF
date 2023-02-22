@@ -9,7 +9,7 @@ const Menu: React.FC = () => {
 
   const handleMenu = (): MenuItems[] => {
     const profiles = user.perfiles.map((profile) => {
-      switch (profile.nombre) {
+      switch (profile?.nombre) {
         case ProfilesData[0]:
           return ProfilesMenu.find((menu) => menu.profile === ProfilesData.Anulaciones);
         case ProfilesData[1]:

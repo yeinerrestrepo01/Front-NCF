@@ -12,6 +12,7 @@ interface TextInputProps {
   placeholder?: string;
   required?: boolean;
   type?: InputType;
+  maxLength?: number;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -21,6 +22,7 @@ const TextInput: React.FC<TextInputProps> = ({
   placeholder,
   required,
   type,
+  maxLength,
 }) => {
   const [field, meta] = useField({
     name,
@@ -42,6 +44,7 @@ const TextInput: React.FC<TextInputProps> = ({
         placeholder={placeholder}
         name={name}
         autoComplete={'off'}
+        maxLength={maxLength}
         {...field}
       />
     </div>

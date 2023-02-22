@@ -45,6 +45,11 @@ export const MenuData: MenuItems[] = [
     name: 'Reportes',
     url: 'reports',
   },
+  {
+    id: 10,
+    name: 'Asignacion Perfiles',
+    url: 'perfiles',
+  },
 ];
 
 export const ProfilesMenu: Menuprofile[] = [
@@ -57,7 +62,7 @@ export const ProfilesMenu: Menuprofile[] = [
     profile: ProfilesData.Recalculo,
   },
   {
-    menu: [1, 2, 3, 4, 5],
+    menu: [1, 2, 3, 4, 5, 9],
     profile: ProfilesData.Root,
   },
   {

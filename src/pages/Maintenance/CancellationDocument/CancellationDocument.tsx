@@ -52,7 +52,7 @@ const CancellationDocument: React.FC = () => {
     mutate(formValues, {
       onSuccess: (res) => {
         if (res.estadoHttp === 200) {
-          openModalAlert('Proceso realizado exitosamente.');
+          openModalAlert(res.mensaje);
           setResetForm(true);
           refetch();
         } else {
@@ -69,7 +69,7 @@ const CancellationDocument: React.FC = () => {
     updateCancellation(formValues, {
       onSuccess: (res) => {
         if (res.estadoHttp === 200) {
-          openModalAlert('Proceso realizado exitosamente.');
+          openModalAlert(res.mensaje);
           setResetForm(true);
           setIsEdit(false);
           setValuesEdit(null);
