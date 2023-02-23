@@ -1,0 +1,14 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: calc(100vh - 60px);
+  padding: 70px 0 110px 0;
+
+  .error {
+    color: #999999;
+    font-size: 35px;
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { BackDrop, PasswordInput, TextInput } from 'components';
-import { useAuthentication, useModalAlert } from 'global/hooks';
+import { useAuthentication, useLocalStorage, useModalAlert } from 'global/hooks';
 import { FormLoginInit } from 'pages/Authentication/constants/Authentication.constant';
 import { LoginInterface } from 'pages/Authentication/constants/Authentication.interface';
 import { useLogin } from 'pages/Authentication/services';
@@ -15,6 +15,7 @@ const Login: React.FC = () => {
   const { openModalAlert } = useModalAlert();
   const { mutate, isLoading } = useLogin();
   const { login } = useAuthentication();
+  const [, setNav] = useLocalStorage<string>('nfc_nav', null);
 
   const handleLogin = (loginForm: LoginInterface) => {
     if (isLoading) return;
@@ -29,6 +30,7 @@ const Login: React.FC = () => {
             login(resp.respuesta);
             if (resp.respuesta?.perfiles.length >= 0) {
               const menuInitial = getMainMenu(resp.respuesta.perfiles[0].nombre);
+              setNav(menuInitial.url);
               navigate(menuInitial.id === 1 ? menuInitial.url : `/home/${menuInitial.url}`);
             }
           } else {

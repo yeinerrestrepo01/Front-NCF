@@ -1,5 +1,7 @@
 import axios, { AxiosError } from 'axios';
+import { MenuData, ProfilesMenu } from 'global/constants';
 import { useLocalStorage, useModalAlert } from 'global/hooks';
+import { MenuItems, Profiles, ProfilesData } from 'global/types';
 import { Authentication, UserData } from 'global/types/Resolve.interface';
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useQueryClient } from 'react-query';
@@ -12,13 +14,46 @@ export const AuthenticationContext = React.createContext<Authentication>({
   login: null,
   logout: null,
   user: null,
+  menus: null,
 });
 
 export const AuthenticationProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<UserData>(null);
   const [loginUser, setLoginUser] = useLocalStorage<UserData>('nfc_user', null);
+  const [menuUser, setMenuUser] = useLocalStorage<MenuItems[]>('nfc_menu', null);
+  const [menus, setMenus] = useState<MenuItems[]>(null);
   const { openModalAlert } = useModalAlert();
   const cache = useQueryClient();
+
+  const handleMenu = useCallback((perfiles: Profiles[]): MenuItems[] => {
+    const profiles = perfiles.map((profile) => {
+      switch (profile?.nombre) {
+        case ProfilesData[0]:
+          return ProfilesMenu.find((menu) => menu.profile === ProfilesData.Anulaciones);
+        case ProfilesData[1]:
+          return ProfilesMenu.find((menu) => menu.profile === ProfilesData.Recalculo);
+        case ProfilesData[2]:
+          return ProfilesMenu.find((menu) => menu.profile === ProfilesData.Root);
+        case ProfilesData[3]:
+          return ProfilesMenu.find((menu) => menu.profile === ProfilesData.Soporte);
+
+        default:
+          return null;
+      }
+    });
+
+    const listMenu: MenuItems[] = [];
+    profiles.forEach((menu) => {
+      menu.menu.forEach((item) => {
+        if (!listMenu.some((x) => x.id === item)) {
+          const dataMenu = MenuData.find((x) => x.id === item);
+          listMenu.push(dataMenu);
+        }
+      });
+    });
+
+    return listMenu;
+  }, []);
 
   useEffect(() => {
     if (!!user && user?.name !== loginUser?.name) {
@@ -35,16 +70,24 @@ export const AuthenticationProvider: React.FC<AuthProviderProps> = ({ children }
       if (!!data) {
         setUser(data);
         setLoginUser(data);
+        if (data.perfiles?.length > 0) {
+          const listmenu = handleMenu(data.perfiles);
+          setMenus(listmenu);
+          setMenuUser(listmenu);
+        }
       }
     },
-    [setLoginUser]
+    [handleMenu, setLoginUser, setMenuUser]
   );
 
   const logout = useCallback(() => {
     cache.clear();
     setUser(null);
     setLoginUser(null);
-  }, [cache, setLoginUser]);
+    setMenuUser(null);
+    setMenus(null);
+    localStorage.removeItem('nfc_nav');
+  }, [cache, setLoginUser, setMenuUser]);
 
   useLayoutEffect(() => {
     const authInterceptor = axios.interceptors.response.use(undefined, async (err: AxiosError) => {
@@ -73,13 +116,20 @@ export const AuthenticationProvider: React.FC<AuthProviderProps> = ({ children }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (!menus && !!menuUser) {
+      setMenus(menuUser);
+    }
+  }, [menuUser, menus]);
+
   const auth = useMemo(
     () => ({
       login,
       logout,
       user,
+      menus,
     }),
-    [login, logout, user]
+    [login, logout, menus, user]
   );
 
   return <AuthenticationContext.Provider value={auth}>{children}</AuthenticationContext.Provider>;

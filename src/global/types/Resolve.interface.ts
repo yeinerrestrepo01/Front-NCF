@@ -1,4 +1,4 @@
-import { Profiles } from 'global/types';
+import { MenuItems, Profiles } from 'global/types';
 
 export type Global = {
   APIUrl: string;
@@ -8,6 +8,7 @@ export type Authentication = {
   login: (params: UserData) => void;
   logout: () => void;
   user: UserData;
+  menus?: MenuItems[];
 };
 
 export type UserData = {
