@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 50%;
+
+  div {
+    flex: 1;
+  }
+}
