@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getMainMenu } from 'global/helpers';
 import { Menu } from 'components/Header/elements';
 import { useAuthentication } from 'global/hooks';
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuthentication();
+  const { user, menus, logout } = useAuthentication();
   const [urlMenu, setUrlMenu] = useState(null);
 
   useEffect(() => {
-    if (user) {
-      if (user?.perfiles.length >= 0) {
-        setUrlMenu(getMainMenu(user.perfiles[0]?.nombre));
-      }
+    if (menus?.length >= 0) {
+      setUrlMenu(menus[0]);
     }
 
     return () => {
       setUrlMenu(null);
     };
-  }, [user]);
+  }, [menus]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar navbar-dark bg-dark">
       <span
         className={`${styles.pointer} navbar-brand`}
-        onClick={() => navigate(urlMenu.id === 1 ? urlMenu.url : `/home/${urlMenu.url}`)}
+        onClick={() => urlMenu && navigate(urlMenu.id === 1 ? urlMenu.url : `/home/${urlMenu.url}`)}
       >
         ABInBev
       </span>

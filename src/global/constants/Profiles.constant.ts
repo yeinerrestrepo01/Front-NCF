@@ -62,7 +62,7 @@ export const ProfilesMenu: Menuprofile[] = [
     profile: ProfilesData.Recalculo,
   },
   {
-    menu: [1, 2, 3, 4, 5, 9],
+    menu: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     profile: ProfilesData.Root,
   },
   {

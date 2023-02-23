@@ -14,12 +14,13 @@ const DocumentCorrection = lazy(
   () => import('pages/Maintenance/DocumentCorrection/DocumentCorrection')
 );
 const Reports = lazy(() => import('pages/ReportsPage/ReportsPage'));
+const NoAccess = lazy(() => import('pages/NoAccessPage/NoAccessPage'));
 
 const HomeNavegation: React.FC = () => {
   return (
     <Suspense fallback={<BackDrop show />}>
       <Routes>
-        <Route element={<Home />} path="/" />
+        <Route element={<Home />} index />
         <Route element={<DGIICorrection />} path="dgii" />
         <Route element={<PartialCancellation />} path="partial" />
         <Route element={<SAP />} path="sap" />
@@ -27,6 +28,7 @@ const HomeNavegation: React.FC = () => {
         <Route element={<CancellationDocument />} path="cancellation" />
         <Route element={<DocumentCorrection />} path="correction" />
         <Route element={<Reports />} path="reports" />
+        <Route element={<NoAccess />} path="noaccess" />
         <Route path="*" element={<Navigate to={'/404'} replace />} />
       </Routes>
     </Suspense>

@@ -8,7 +8,7 @@ const AuthenticationNavigation: React.FC = () => {
   return (
     <Suspense fallback={<BackDrop show />}>
       <Routes>
-        <Route element={<Login />} path="/" />
+        <Route element={<Login />} index />
         <Route path="*" element={<Navigate to={'/404'} replace />} />
       </Routes>
     </Suspense>
