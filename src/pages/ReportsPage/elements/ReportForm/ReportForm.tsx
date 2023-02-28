@@ -20,8 +20,8 @@ const ReportForm: React.FC<ReportFormProps> = ({ handleReport }) => {
       >
         {() => (
           <Form className={styles.form}>
-            <DateInput name="dateInitial" />
-            <DateInput name="dateEnd" />
+            <DateInput name="dateInitial" label="Fecha Inicial" />
+            <DateInput name="dateEnd" label="Fecha Final" />
             <Button typeView="primary" title="Consultar" type="submit" />
           </Form>
         )}

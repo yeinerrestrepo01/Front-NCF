@@ -24,7 +24,7 @@ const TableReport: React.FC<TableReportProps> = ({ data }) => {
     >
       <TableColumn field="idProduct" title="Codigo Producto" />
       <TableColumn field="tipo" title="Tipo" />
-      <TableColumn field="contProduct" title="Contenido Producto" />
+      <TableColumn field="contProduct" title="Cantidad" />
       <TableColumn
         cell={handleDecimal}
         className={styles.number}

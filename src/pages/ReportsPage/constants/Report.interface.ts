@@ -9,6 +9,7 @@ export type ReportNFC = {
   idProduct: string;
   brutoTotal: number;
   descuentoAmount: number;
+  taxAmount: number;
   isc: number;
   isce: number;
   interestValue: number;
