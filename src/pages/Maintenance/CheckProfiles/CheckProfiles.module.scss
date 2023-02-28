@@ -1,0 +1,13 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  &_form {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    width: 100%;
+  }
+}
