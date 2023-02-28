@@ -1,0 +1,17 @@
+.content {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  justify-content: center;
+  align-items: end;
+
+  div {
+    flex: 1;
+  }
+
+  button {
+    width: 120px;
+    height: 40px;
+  }
+}

@@ -1,21 +1,7 @@
 .content {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-
-    .form {
-        display: flex;
-        flex-direction: column;
-        gap: 50px;
-
-        .formContent {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .button {
-            width: 200px;
-        }
-    }
+  width: 60%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 120px;
+  gap: 50px;
+  align-items: center;
 }

@@ -15,6 +15,7 @@ const DocumentCorrection = lazy(
 );
 const Reports = lazy(() => import('pages/ReportsPage/ReportsPage'));
 const NoAccess = lazy(() => import('pages/NoAccessPage/NoAccessPage'));
+const CheckProfiles = lazy(() => import('pages/Maintenance/CheckProfiles/CheckProfiles'));
 
 const HomeNavegation: React.FC = () => {
   return (
@@ -29,6 +30,7 @@ const HomeNavegation: React.FC = () => {
         <Route element={<DocumentCorrection />} path="correction" />
         <Route element={<Reports />} path="reports" />
         <Route element={<NoAccess />} path="noaccess" />
+        <Route element={<CheckProfiles />} path="profile" />
         <Route path="*" element={<Navigate to={'/404'} replace />} />
       </Routes>
     </Suspense>
