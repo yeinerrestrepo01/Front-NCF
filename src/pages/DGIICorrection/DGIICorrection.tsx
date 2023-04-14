@@ -44,6 +44,7 @@ const DGIICorrection: React.FC = () => {
   };
 
   const hanldeSetCorrection = (invoiceSetting: IinvoiceSetting) => {
+    invoiceSetting.Dgi = true;
     if (
       invoiceSetting != null &&
       invoiceSetting.freeGoods === 0 &&

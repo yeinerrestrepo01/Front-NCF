@@ -46,6 +46,7 @@ const PartialCancellation: React.FC = () => {
   };
 
   const hanldeSetCorrection = (invoiceSetting: IinvoiceSetting) => {
+    invoiceSetting.Dgi = false;
     if (
       invoiceSetting != null &&
       (!correctionInfo.find((inf) => inf.id === invoiceSetting.id) || correctionInfo.length === 0)
